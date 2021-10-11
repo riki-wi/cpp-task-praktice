@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 // sum and product of digits of a number
 void sumAndProduct()
@@ -17,6 +18,23 @@ void sumAndProduct()
     std::cout << product << std::endl;
 }
 
+// sum of sinuses sin(x) + sin(sin(x)) + ... + sin(sin...(sin(sin(x)))
+// input n then x
+void sumOfSin()
+{
+    int n = 0;
+    double x = 0;
+    std::cin >> n;
+    std::cin >> x;
+    double sumSin = 0;
+    double helper = x;
+    for (int i = 1; i <= n; i++)
+    {
+        helper = sin(helper);
+        sumSin += helper;
+    }
+    std::cout << sumSin;
+}
 
 
 
@@ -24,6 +42,7 @@ void sumAndProduct()
 
 int main()
 {
-    sumAndProduct();
+    //sumAndProduct();
+    sumOfSin();
     return 0;
 }
