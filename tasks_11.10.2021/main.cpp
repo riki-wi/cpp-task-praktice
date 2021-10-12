@@ -1,6 +1,13 @@
 #include <iostream>
 #include <cmath>
 
+//belonging to the circle
+bool belongOfCircle(double x, double y, double r)
+{
+    if (x * x + y * y <= r * r) return true;
+    return false;
+}
+
 // sum and product of digits of a number
 void sumAndProduct()
 {
@@ -36,6 +43,31 @@ void sumOfSin()
     std::cout << sumSin;
 }
 
+//number of combinations of geese and rabbits
+//enter n = the number of pairs of paws
+void geeseAndRabbits()
+{
+    int n = 0;
+    std::cin >> n;
+    n = n * 2;
+}
+
+//the number of points with integer coordinates in the circle
+//enter r = radius
+void pointsInTheCircle()
+{
+    int count = 0;
+    int r = 0;
+    std::cin >> r;
+    for (int i = -r; i <= r; i++)
+    {
+        for (int j = -r; j <=r; j++)
+        {
+            if (belongOfCircle(i, j, r)) count++;
+        }
+    }
+    std::cout << count;
+}
 
 
 
@@ -43,6 +75,8 @@ void sumOfSin()
 int main()
 {
     //sumAndProduct();
-    sumOfSin();
+   // sumOfSin();
+   // geeseAndRabbits();
+   pointsInTheCircle();
     return 0;
 }
