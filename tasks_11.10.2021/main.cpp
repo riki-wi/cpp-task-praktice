@@ -1,10 +1,17 @@
 #include <iostream>
 #include <cmath>
+#include <cfloat>
+
+// comparison two double
+bool comparison(double x, double y)
+{
+    return floor(x) - floor(y) < DBL_EPSILON * fmax(fabs(x), fabs(y));
+}
 
 //belonging to the circle
 bool belongOfCircle(double x, double y, double r)
 {
-    if (x * x + y * y <= r * r) return true;
+    if (comparison(x * x + y * y, r * r)) return true;
     return false;
 }
 
@@ -14,7 +21,6 @@ void sumAndProduct()
     int n = 0;
     int sum = 0;
     int product = 1;
-
     std::cin >> n;
     for (int i = abs(n) ; i % 10 >= 1; i /= 10)
     {
@@ -43,40 +49,32 @@ void sumOfSin()
     std::cout << sumSin;
 }
 
-//number of combinations of geese and rabbits
-//enter n = the number of pairs of paws
-void geeseAndRabbits()
-{
-    int n = 0;
-    std::cin >> n;
-    n = n * 2;
-}
 
 //the number of points with integer coordinates in the circle
 //enter r = radius
 void pointsInTheCircle()
 {
     int count = 0;
-    int r = 0;
+    double r = 0;
     std::cin >> r;
-    for (int i = -r; i <= r; i++)
+    for (int i = 0; i <= (int)r; i++)
     {
-        for (int j = -r; j <=r; j++)
+        for (int j = 0; j <=(int)r; j++)
         {
-            if (belongOfCircle(i, j, r)) count++;
+            if (belongOfCircle(i, j, r)) {
+                std::cout << i << " "  << j << std::endl;
+                count++;
+            }
         }
     }
-    std::cout << count;
+    std::cout << 4 *(count - floor(r)) - 3;
 }
-
-
-
 
 int main()
 {
-    //sumAndProduct();
+   // sumAndProduct();
    // sumOfSin();
    // geeseAndRabbits();
    pointsInTheCircle();
-    return 0;
+   return 0;
 }
