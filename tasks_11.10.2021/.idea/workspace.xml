@@ -73,7 +73,7 @@
       <workItem from="1634001388704" duration="2542000" />
       <workItem from="1634072389302" duration="152000" />
       <workItem from="1634339674162" duration="661000" />
-      <workItem from="1634393663400" duration="2113000" />
+      <workItem from="1634393663400" duration="2905000" />
     </task>
     <task id="LOCAL-00001" summary="add task &quot;sum and product of digits a number&quot;">
       <created>1633965917876</created>
@@ -96,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634002451919</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add safe comparison double">
+      <created>1634401402041</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634401402041</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +126,7 @@
     <MESSAGE value="add task &quot;sum and product of digits a number&quot;" />
     <MESSAGE value="add task &quot;sumOfSin&quot;" />
     <MESSAGE value="add task &quot;points in the circle&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add task &quot;points in the circle&quot;" />
+    <MESSAGE value="add safe comparison double" />
+    <option name="LAST_COMMIT_MESSAGE" value="add safe comparison double" />
   </component>
 </project>

@@ -49,7 +49,6 @@ void sumOfSin()
     std::cout << sumSin;
 }
 
-
 //the number of points with integer coordinates in the circle
 //enter r = radius
 void pointsInTheCircle()
@@ -70,11 +69,24 @@ void pointsInTheCircle()
     std::cout << 4 *(count - floor(r)) - 3;
 }
 
+// goose and rabbit
+// enter number of paws
+void gooseAndRabbit() {
+    int paws = 0;
+    std::cin >> paws;
+    for (int i = 0; i <= paws; i += 4)
+    {
+        std::cout << "rabbits: " << i / 4 << " goose: " << (int)paws / 2 - i / 2 << std::endl;
+    }
+
+}
+
 int main()
 {
    // sumAndProduct();
    // sumOfSin();
    // geeseAndRabbits();
-   pointsInTheCircle();
+   // pointsInTheCircle();
+   gooseAndRabbit();
    return 0;
 }
