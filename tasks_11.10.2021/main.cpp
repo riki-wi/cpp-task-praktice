@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <cfloat>
+#include <iomanip>
 
 // comparison two double
 bool comparison(double x, double y)
@@ -70,7 +71,7 @@ void pointsInTheCircle()
 }
 
 // goose and rabbit
-// enter number of paws
+// enter paws = number of paws
 void gooseAndRabbit() {
     int paws = 0;
     std::cin >> paws;
@@ -78,15 +79,53 @@ void gooseAndRabbit() {
     {
         std::cout << "rabbits: " << i / 4 << " goose: " << (int)paws / 2 - i / 2 << std::endl;
     }
+}
 
+/*
+// sin Taylor
+// enter x then enter n = accuracy
+void sinTaylor(){
+    double x = 0;
+    int n = 0;
+    std::cin >> x;
+    std::cin >> n;
+    double sinTaylor = x;
+    x *= x;
+    for(int i = 2; i <= 2 * n; i += 2)
+    {
+        sinTaylor += (-1) * sinTaylor * x / i * (i + 1);
+    }
+    std::cout << sinTaylor;
+}
+*/
+
+// pi decomposition of Leibniz
+
+void piDecomposition()
+{
+    double piDec = 1.0;
+    int sign = -1;
+    for (int i = 5; i < 100000; i += 1) // accuracy (5;100000)
+    {
+        for (int j = 3; j < 2 * i; j += 2)
+        {
+            piDec += sign * (1.0 / j);
+            sign *= -1;
+        }
+        piDec *= 4;
+        std::cout << std::setprecision(16) << piDec << std::endl;
+        sign = -1;
+        piDec = 1.0;
+    }
 }
 
 int main()
 {
-   // sumAndProduct();
-   // sumOfSin();
-   // geeseAndRabbits();
-   // pointsInTheCircle();
-   gooseAndRabbit();
+   //sumAndProduct();
+   //sumOfSin();
+   //pointsInTheCircle();
+   //gooseAndRabbit();
+   //sinTaylor();
+   piDecomposition();
    return 0;
 }
