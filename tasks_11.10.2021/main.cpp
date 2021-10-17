@@ -6,7 +6,7 @@
 // comparison two double
 bool comparison(double x, double y)
 {
-    return floor(x) - floor(y) < DBL_EPSILON * fmax(fabs(x), fabs(y));
+    return fabs(x) - fabs(y) < DBL_EPSILON * fmax(fabs(x), fabs(y));
 }
 
 //belonging to the circle

@@ -13,7 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="be1ce072-39ea-4fa5-b9bd-f63bdab04831" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../stars/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stars/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +73,7 @@
       <workItem from="1634072389302" duration="152000" />
       <workItem from="1634339674162" duration="661000" />
       <workItem from="1634393663400" duration="3757000" />
-      <workItem from="1634496666346" duration="4289000" />
+      <workItem from="1634496666346" duration="4491000" />
     </task>
     <task id="LOCAL-00001" summary="add task &quot;sum and product of digits a number&quot;">
       <created>1633965917876</created>
@@ -118,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634500784896</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add task &quot;sin Taylor&quot;">
+      <created>1634501410225</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1634501410225</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +150,7 @@
     <MESSAGE value="add safe comparison double" />
     <MESSAGE value="add task &quot;goose and rabbit&quot;" />
     <MESSAGE value="add task &quot;pi Decomposition&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add task &quot;pi Decomposition&quot;" />
+    <MESSAGE value="add task &quot;sin Taylor&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="add task &quot;sin Taylor&quot;" />
   </component>
 </project>
