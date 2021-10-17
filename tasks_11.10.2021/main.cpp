@@ -81,26 +81,27 @@ void gooseAndRabbit() {
     }
 }
 
-/*
+
 // sin Taylor
 // enter x then enter n = accuracy
 void sinTaylor(){
     double x = 0;
     int n = 0;
+    int sign = -1;
     std::cin >> x;
     std::cin >> n;
     double sinTaylor = x;
     x *= x;
     for(int i = 2; i <= 2 * n; i += 2)
     {
-        sinTaylor += (-1) * sinTaylor * x / i * (i + 1);
+        sinTaylor += sign * sinTaylor * x / i / (i + 1);
+        sign *= -1;
     }
     std::cout << sinTaylor;
 }
-*/
+
 
 // pi decomposition of Leibniz
-
 void piDecomposition()
 {
     double piDec = 1.0;
@@ -125,7 +126,7 @@ int main()
    //sumOfSin();
    //pointsInTheCircle();
    //gooseAndRabbit();
-   //sinTaylor();
-   piDecomposition();
+   sinTaylor();
+   //piDecomposition();
    return 0;
 }
