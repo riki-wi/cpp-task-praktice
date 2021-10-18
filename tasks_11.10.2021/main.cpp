@@ -3,6 +3,12 @@
 #include <cfloat>
 #include <iomanip>
 
+// The comparison is equal
+bool comparisonIsEqual(double x, double y)
+{
+    return fabs(x - y) < DBL_EPSILON * fmax(fabs(x), fabs(y));
+}
+
 // comparison two double
 bool comparison(double x, double y)
 {
@@ -14,6 +20,26 @@ bool belongOfCircle(double x, double y, double r)
 {
     if (comparison(x * x + y * y, r * r)) return true;
     return false;
+}
+
+//distance to the point
+void distanceToThePoint()
+{
+    double x1 = 0;
+    double x2 = 0;
+    double x3 = 0;
+    double y1 = 0;
+    double y2 = 0;
+    double y3 = 0;
+    std::cin >> x1;
+    std::cin >> y1;
+    std::cin >> x2;
+    std::cin >> y2;
+    std::cin >> x3;
+    std::cin >> y3;
+    double distanceOne = sqrt((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1));
+    double distanceTwo = sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2));
+    std::cout << comparisonIsEqual(distanceOne + distanceTwo, 10.0);
 }
 
 // sum and product of digits of a number
@@ -126,7 +152,8 @@ int main()
    //sumOfSin();
    //pointsInTheCircle();
    //gooseAndRabbit();
-   sinTaylor();
+   //sinTaylor();
    //piDecomposition();
+   distanceToThePoint();
    return 0;
 }
