@@ -2,6 +2,7 @@
 #include <cmath>
 #include <cfloat>
 #include <iomanip>
+#include <random>
 
 // The comparison is equal
 bool comparisonIsEqual(double x, double y)
@@ -39,7 +40,7 @@ void distanceToThePoint()
     std::cin >> y3;
     double distanceOne = sqrt((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1));
     double distanceTwo = sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2));
-    std::cout << comparisonIsEqual(distanceOne + distanceTwo, 10.0);
+    comparisonIsEqual(distanceOne + distanceTwo, 0.0);
 }
 
 // sum and product of digits of a number
@@ -107,7 +108,6 @@ void gooseAndRabbit() {
     }
 }
 
-
 // sin Taylor
 // enter x then enter n = accuracy
 void sinTaylor(){
@@ -125,7 +125,6 @@ void sinTaylor(){
     }
     std::cout << sinTaylor;
 }
-
 
 // pi decomposition of Leibniz
 void piDecomposition()
@@ -146,6 +145,27 @@ void piDecomposition()
     }
 }
 
+// the ratio of the area of a square and a circle, the calculation of pi
+// enter r = radius
+void ratioArea()
+{
+    double r = 0.;
+    std::cin >> r;
+    double circle = 0;
+    int countOfPoints = 1000000;
+    for (int i = 0; i < countOfPoints; i++)
+    {
+        double randomXPoints = ((double)random() / RAND_MAX) * r;
+        double randomYPoints = ((double)random() / RAND_MAX) * r;
+        if (belongOfCircle(randomXPoints, randomYPoints, r)) circle++;
+    }
+    double ratioArea = circle / countOfPoints;
+    std::cout << ratioArea << std::endl;
+    double pi = 4 * ratioArea;
+    std::cout << pi;
+
+}
+
 int main()
 {
    //sumAndProduct();
@@ -154,6 +174,7 @@ int main()
    //gooseAndRabbit();
    //sinTaylor();
    //piDecomposition();
-   distanceToThePoint();
+   //distanceToThePoint();
+   ratioArea();
    return 0;
 }

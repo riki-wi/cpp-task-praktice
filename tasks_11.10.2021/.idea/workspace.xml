@@ -75,7 +75,9 @@
       <workItem from="1634072389302" duration="152000" />
       <workItem from="1634339674162" duration="661000" />
       <workItem from="1634393663400" duration="3757000" />
-      <workItem from="1634496666346" duration="5989000" />
+      <workItem from="1634496666346" duration="6911000" />
+      <workItem from="1634523110390" duration="660000" />
+      <workItem from="1634679851240" duration="655000" />
     </task>
     <task id="LOCAL-00001" summary="add task &quot;sum and product of digits a number&quot;">
       <created>1633965917876</created>
@@ -133,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634501720655</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add task &quot;disance to the point&quot;">
+      <created>1634522248912</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1634522248912</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +170,7 @@
     <MESSAGE value="add task &quot;pi Decomposition&quot;" />
     <MESSAGE value="add task &quot;sin Taylor&quot;" />
     <MESSAGE value="change comparison function" />
-    <option name="LAST_COMMIT_MESSAGE" value="change comparison function" />
+    <MESSAGE value="add task &quot;disance to the point&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="add task &quot;disance to the point&quot;" />
   </component>
 </project>
