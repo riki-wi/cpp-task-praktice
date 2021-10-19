@@ -26,12 +26,13 @@ bool belongOfCircle(double x, double y, double r)
 //distance to the point
 void distanceToThePoint()
 {
-    double x1 = 0;
-    double x2 = 0;
-    double x3 = 0;
-    double y1 = 0;
-    double y2 = 0;
-    double y3 = 0;
+    double x1 = 0.;
+    double x2 = 0.;
+    double x3 = 0.;
+    double y1 = 0.;
+    double y2 = 0.;
+    double y3 = 0.;
+    std::cout << "enter the coordinates of the three points x1, y1 ... " << std::endl;
     std::cin >> x1;
     std::cin >> y1;
     std::cin >> x2;
@@ -49,6 +50,7 @@ void sumAndProduct()
     int n = 0;
     int sum = 0;
     int product = 1;
+    std::cout << "enter a number " << std::endl;
     std::cin >> n;
     for (int i = abs(n) ; i % 10 >= 1; i /= 10)
     {
@@ -64,10 +66,11 @@ void sumAndProduct()
 void sumOfSin()
 {
     int n = 0;
-    double x = 0;
+    double x = 0.;
+    std::cout << "enter the precision then the sine argument " << std::endl;
     std::cin >> n;
     std::cin >> x;
-    double sumSin = 0;
+    double sumSin = 0.;
     double helper = x;
     for (int i = 1; i <= n; i++)
     {
@@ -82,7 +85,8 @@ void sumOfSin()
 void pointsInTheCircle()
 {
     int count = 0;
-    double r = 0;
+    double r = 0.;
+    std::cout << "enter radius " << std::endl;
     std::cin >> r;
     for (int i = 0; i <= (int)r; i++)
     {
@@ -101,6 +105,7 @@ void pointsInTheCircle()
 // enter paws = number of paws
 void gooseAndRabbit() {
     int paws = 0;
+    std::cout << "enter numbers of paws " << std::endl;
     std::cin >> paws;
     for (int i = 0; i <= paws; i += 4)
     {
@@ -111,9 +116,10 @@ void gooseAndRabbit() {
 // sin Taylor
 // enter x then enter n = accuracy
 void sinTaylor(){
-    double x = 0;
+    double x = 0.;
     int n = 0;
     int sign = -1;
+    std::cout << "enter the precision then the sine argument " << std::endl;
     std::cin >> x;
     std::cin >> n;
     double sinTaylor = x;
@@ -129,13 +135,13 @@ void sinTaylor(){
 // pi decomposition of Leibniz
 void piDecomposition()
 {
-    double piDec = 1.0;
+    double piDec = 1.;
     int sign = -1;
     for (int i = 5; i < 100000; i += 1) // accuracy (5;100000)
     {
         for (int j = 3; j < 2 * i; j += 2)
         {
-            piDec += sign * (1.0 / j);
+            piDec += sign * (1. / j);
             sign *= -1;
         }
         piDec *= 4;
@@ -150,6 +156,7 @@ void piDecomposition()
 void ratioArea()
 {
     double r = 0.;
+    std::cout << "enter radius " << std::endl;
     std::cin >> r;
     double circle = 0;
     int countOfPoints = 1000000;
@@ -175,6 +182,6 @@ int main()
    //sinTaylor();
    //piDecomposition();
    //distanceToThePoint();
-   ratioArea();
+   //ratioArea();
    return 0;
 }
