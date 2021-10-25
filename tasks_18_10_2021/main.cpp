@@ -97,10 +97,12 @@ void differenceInHoursMinutesSeconds(int dayFirst, int monthFirst, int yearFirst
     std::cout << "seconds: " << day * 24 * 60 * 60 << std::endl;
 }
 
+
+
 int main()
 {
    // differenceInHoursMinutesSeconds(14, 4, 2000, 25, 10, 2021);
    // myAgeInDay();
-   //translation();
+   // translation();
     return 0;
 }
