@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+
 // helper function translation
 std::string checkNumberForTranslation(int x)
 {
@@ -32,10 +33,21 @@ void translation()
     std::cout << res << std::endl;
 }
 
+// leap year
+bool leapYear(int year)
+{
+    if (!(year % 400)) return true;
+    if (!(year % 4))
+    {
+        if(!(year % 100)) return false;
+        else return true;
+    }
+    else return false;
+}
 
 
-int main() {
-
-    translation();
+int main()
+{
+   // translation();
     return 0;
 }
