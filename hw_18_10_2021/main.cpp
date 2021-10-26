@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <math.h>
+#include <cmath>
 
 //day of the week by date
 void weekDay()
@@ -30,10 +30,36 @@ void weekDay()
     std::cout << res[weekDay] << "\n";
 }
 
+//translation into the Roman numeral system
+void trIntoRoman(long long x)
+{
+    std::string res;
+    std::map<int, std::string> roman = {{1, "I"}, {4, "IV"}, {5, "V"}, {9, "IX"},{10, "X"},
+                                        {40, "LX"}, {50, "L"}, {90, "XC"}, {100, "X"},
+                                        {400, "CD"}, {500, "D"}, {900, "CM"}, {1000, "M"}};
+    for (auto it = roman.rbegin(); it != roman.rend(); it++)
+    {
+        while(x >= it->first)
+        {
+            res += it->second;
+            x -= it->first;
+        }
+        if (x == 0) break;
+    }
+    std::cout << res << std::endl;
+}
+
 
 
 int main() {
 
-    weekDay();
+    //weekDay();
+    for (int i = 1; i < 1000; i++)
+    {
+        std::cout << i << " = ";
+        trIntoRoman(i);
+    }
     return 0;
 }
+
+
