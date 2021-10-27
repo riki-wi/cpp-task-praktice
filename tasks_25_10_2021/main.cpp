@@ -60,10 +60,26 @@ void taskOne()
     {
         if (mas[i] >= arAv / size) std::cout << mas[i] << " ";
     }
+    std::cout << std::endl;
+}
+
+//random hex
+void taskTwo()
+{
+    int x = 0;
+    char mas[16] = {'1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    std::cout << "Enter digit number: " << std::endl;
+    std::cin >> x;
+    for (int i = 0; i < x; i++)
+    {
+        std::cout << mas[rand() % 16];
+    }
+    std::cout << std::endl;
 }
 
 int main()
 {
-    taskOne();
+    //taskOne();
+    taskTwo();
     return 0;
 }
