@@ -20,10 +20,25 @@ void initializationMasRand(int* mas, int size)
 //minimal elements, their indexes, arithmetic average
 void taskOne()
 {
-    const int size = 10;
+    const int size = 11;
     int* mas = new int[size];
     initializationMasRand(mas, size);
     std::cout << "mas: ";
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << mas[i] << " ";
+    }
+    std::cout << std::endl;
+
+
+    for (int i = 0; i < (int)size / 2; i++)
+    {
+        int j = size - i - 1;
+        int x = mas[i];
+        mas[i] = mas[j];
+        mas[j] = x;
+    }
+    std::cout << "mas reverse: ";
     for (int i = 0; i < size; i++)
     {
         std::cout << mas[i] << " ";
@@ -45,12 +60,14 @@ void taskOne()
     }
     std::cout << std::endl;
 
+
     double arAv = 0;
     for (int i = 0; i < size; i++)
     {
         arAv += mas[i];
     }
     std::cout << "arithmetic average: " << arAv / size << std::endl;
+
 
     for (int i = 0; i < size; i++)
     {
@@ -77,9 +94,33 @@ void taskTwo()
     std::cout << std::endl;
 }
 
+//the most common element
+void taskThree()
+{
+    const int size = 10;
+    int mas[size] = {4,2,3,3,2,1,4,4,4,1};
+    int count = 0;
+    int resIndex = 0;
+    for (int i : mas)
+    {
+        int x = 0;
+        for (int j : mas)
+        {
+            if (i == j) x++;
+        }
+        if (x > count)
+        {
+            count = x;
+            resIndex = i;
+        }
+    }
+    std::cout << "the most common element " << resIndex << std::endl;
+}
+
 int main()
 {
-    //taskOne();
-    taskTwo();
+    taskOne();
+    //taskTwo();
+    //taskThree();
     return 0;
 }
