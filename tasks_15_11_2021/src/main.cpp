@@ -104,7 +104,7 @@ T** transposeIndependentArray(T** mas, size_t n, size_t m)
 }
 
 /* Создание транспонированного массива
- * (возращает "зависимы массив")*/
+ * (возращает "зависимый массив")*/
 template <typename T>
 T** transposeDependentArray(T** mas, size_t n, size_t m)
 {
@@ -123,8 +123,63 @@ T** transposeDependentArray(T** mas, size_t n, size_t m)
 template <typename T>
 T** turnArray180(T** mas, size_t n, size_t m)
 {
-
+    for(size_t i = 0; i < n / 2; i++)
+    {
+        for(size_t j; j < m; j++)
+        {
+            int tmp = mas[n - i - 1][j];
+            mas[n - i - 1][j] = mas[i][j];
+            mas[i][j] = tmp;
+        }
+    }
 }
+
+/*Создание матрицы, как результата умножения матрицы на число
+ * (возращает зависимый массив)*/
+int** multiplyingByNumberReturnDependent(int** mas, size_t n, size_t m, int number)
+{
+    int** res = createDependentTwoDimensionalMas<int>(n, m);
+    for(size_t i = 0; i < n; i++)
+    {
+        for(size_t j = 0; j < m; j++)
+        {
+            res[i][j] = mas[i][j] * number;
+        }
+    }
+    return res;
+}
+
+/*Создание матрицы, как результата умножения матрицы на число
+ * (возращает независимый массив)*/
+int** multiplyingByNumberReturnInDependent(int** mas, size_t n, size_t m, int number)
+{
+    int** res = creatIndependentTwoDimensionalMas<int>(n, m);
+    for(size_t i = 0; i < n; i++)
+    {
+        for(size_t j = 0; j < m; j++)
+        {
+            res[i][j] = mas[i][j] * number;
+        }
+    }
+    return res;
+}
+
+/* Создание матрицы как результата сложения двух числовых матриц.
+ * (возращает независимый массив)*/
+int** sumMatrixIndependent(int** mas1, int** mas2, size_t n, size_t m)
+{
+    int** res = creatIndependentTwoDimensionalMas<int>(n, m);
+    return res;
+}
+
+/* Создание матрицы как результата сложения двух числовых матриц.
+ * (возращает независимый массив)*/
+int** sumMatrixDependent(int** mas1, int** mas2, size_t n, size_t m)
+{
+    int** res = createDependentTwoDimensionalMas<int>(n, m);
+    return res;
+}
+
 
 
 
