@@ -65,7 +65,21 @@ void snake(int** mas, int n, int m)
 //filling an array with diagonal a snake
 void snakeDiagonal(int** mas, int n, int m)
 {
+    int date = 0;
+    for(int diag = 0; diag < n + m; diag++)
+    {
+        if(diag % 2)
+        {
+            continue;
+        }
+        else
+        {
 
+        }
+    }
+
+
+    printDimensionalMas(mas, n, m);
 }
 
 
