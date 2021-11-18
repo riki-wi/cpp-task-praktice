@@ -102,6 +102,53 @@ bool initializationByValueTestThree()
     return res;
 }
 
+/* Умножение матрицы на число (тест независимого массива)*/
+bool multiplyingByNumberTestOne()
+{
+    bool res;
+    int** real = creatIndependentTwoDimensionalMas<int>(5, 4);
+    initializationByValue(real, 5, 4, 9);
+
+    int** test = creatIndependentTwoDimensionalMas<int>(5, 4);
+    initializationByValue(test, 5, 4, 45);
+
+    multiplyingByNumber(real, 5, 4, 5);
+
+    res = assertEqMas<int>(test, 5, 4, real, 5, 4);
+
+    if(res)
+        printTestEqSuccessful(__func__);
+    else
+        printTestEqFailed(__func__);
+
+    deleteDimensionMas(test, 5,4 );
+    deleteDimensionMas(real, 5,4 );
+    return res;
+}
+
+/* Инициализация массива с 1 на главной диагонали
+ * и 0 в остальных элементах
+ * (тест зависимого массива) */
+bool initializationByOneMainDiagonalTestOne()
+{
+    bool res;
+    int** real = createDependentTwoDimensionalMas<int>(5, 4);
+    initializationByOneMainDiagonal(real, 5, 4);
+
+    int** test = new int*[5]{new int[4]{1, 0, 0, 0}, new int[4]{0,1,0,0},
+                             new int[4]{0,0,1,0}, new int[4]{0,0,0,1}, new int[4]{0,0,0,0}};
+
+    res = assertEqMas<int>(test, 5, 4, real, 5, 4);
+
+    if(res)
+        printTestEqSuccessful(__func__);
+    else
+        printTestEqFailed(__func__);
+
+    deleteDimensionMas(test, 5, 4);
+    return res;
+}
+
 
 
 
@@ -112,6 +159,10 @@ int main()
     func.emplace_back(initializationByValueTestOne);
     func.emplace_back(initializationByValueTestTwo);
     func.emplace_back(initializationByValueTestThree);
+
+    func.emplace_back(multiplyingByNumberTestOne);
+
+    func.emplace_back(initializationByOneMainDiagonalTestOne);
 
     for(auto & i : func)
         i();
