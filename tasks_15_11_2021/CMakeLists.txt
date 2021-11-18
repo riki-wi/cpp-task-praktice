@@ -3,4 +3,4 @@ project(tasks_15_11_2021)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(tasks_15_11_2021 src/main.cpp src/main.h test/test.cpp)
+add_executable(tasks_15_11_2021 test/test.cpp)

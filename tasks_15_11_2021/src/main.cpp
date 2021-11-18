@@ -9,7 +9,7 @@ T** creatIndependentTwoDimensionalMas(size_t n, size_t m)
     T** mas = new T*[n];
     for(size_t i = 0; i < n; i++)
     {
-        mas[i] = new int[m];
+        mas[i] = new T[m];
     }
     return mas;
 }
