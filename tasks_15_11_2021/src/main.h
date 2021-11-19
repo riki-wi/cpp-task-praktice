@@ -4,7 +4,7 @@
 /* Создание двумерного массива, лежащего
  * в памяти так, что "строки независят от столбцов" */
 template <typename T>
-T** creatIndependentTwoDimensionalMas(size_t n, size_t m);
+T** createInDependentTwoDimensionalMas(size_t n, size_t m);
 
 /* Создание двумерного массива, лежащего
  * в памяти "одной строкой" */
@@ -59,5 +59,26 @@ int** sumMatrixIndependent(int** mas1, int** mas2, size_t n, size_t m);
 /* Создание матрицы как результата сложения двух числовых матриц.
  * (возращает независимый массив)*/
 int** sumMatrixDependent(int** mas1, int** mas2, size_t n, size_t m);
+
+/* Создание матрицы как результата умножения двух числовых матриц.
+ * (возращает независимый массив)*/
+int** mulMatrixIndependent(int** mas1, size_t n1, size_t m1, int** mas2, size_t n2, size_t m2);
+
+/* Создание матрицы как результата умножения двух числовых матриц.
+ * (возращает зависимый массив)*/
+int** mulMatrixDependent(int** mas1, size_t n1, size_t m1, int** mas2, size_t n12, size_t m2);
+
+/*Обмен местами двух строк*/
+template <typename T>
+void swapRaw(T** mas, size_t n, size_t m, int raw1, int raw2);
+
+/*Обмен местами двух столбцов*/
+template <typename T>
+void swapColumn(T** mas, size_t n, size_t m, int column1, int column2);
+
+/* Получение доступа по ссылке к элементу 2-массива
+ * с заданными значениями строки и столбца*/
+template <typename T>
+T& getElement(T** mas, size_t n, size_t m, size_t row, size_t column);
 
 #endif
