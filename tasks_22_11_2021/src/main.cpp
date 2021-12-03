@@ -60,8 +60,8 @@ bool readFile(const std::string& name)
     return true;
 }
 
-/* файл - картинка */
-bool fileImage(const std::string& finName, const std::string& foutName)
+/* файл - картинка через bitset */
+bool fileImageBitSet(const std::string& finName, const std::string& foutName)
 {
     std::ifstream fin(finName, std::ios_base::in | std::ios_base::binary);
     std::ofstream fout(foutName, std::ios_base::out);
@@ -71,7 +71,6 @@ bool fileImage(const std::string& finName, const std::string& foutName)
         fin.close();
         return false;
     }
-
 
     unsigned char ch;
     for(;fin.peek() != EOF;)
@@ -103,6 +102,54 @@ bool fileImage(const std::string& finName, const std::string& foutName)
 }
 
 
+/* файл - картинка */
+bool fileImage(const std::string& finName, const std::string& foutName)
+{
+    std::ifstream fin(finName, std::ios_base::in | std::ios_base::binary);
+    std::ofstream fout(foutName, std::ios_base::out);
+    if(!fin)
+    {
+        std::cout << "Не удается открыть файл " << finName << std::endl;
+        fin.close();
+        return false;
+    }
+
+    unsigned char ch;
+    for(;fin.peek() != EOF;)
+    {
+        ch = fin.get();
+        if(ch == 10)
+        {
+            fout << '\n';
+        }
+        else
+        {
+            auto* mas = new unsigned char[8];
+            for(int i = 0; i < 8; i++)
+            {
+                mas[i] = ch % 2;
+                ch /= 2;
+            }
+
+            for(int i = 7; i > 0; i--)
+            {
+                if(mas[i] == 1)
+                {
+                    fout << '*';
+                }
+                else
+                {
+                    fout << ' ';
+                }
+            }
+        }
+    }
+    fin.close();
+    fout.close();
+    return true;
+}
+
+
 
 
 int main()
@@ -114,5 +161,5 @@ int main()
 
     copyFile("../resources/ex.txt", "../resources/ex2.txt");
 
-    fileImage("../resources/ex.txt", "../resources/ex3.txt");
+    fileImageBitSet("../resources/ex.txt", "../resources/ex3.txt");
 }
