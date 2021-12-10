@@ -97,12 +97,6 @@ void differenceInHoursMinutesSeconds(int dayFirst, int monthFirst, int yearFirst
     std::cout << "seconds: " << day * 24 * 60 * 60 << std::endl;
 }
 
-void row()
-{
-
-}
-
-
 
 int main()
 {
