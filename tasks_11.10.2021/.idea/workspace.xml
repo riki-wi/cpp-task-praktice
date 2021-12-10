@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="tasks_11_10_2021" targetName="tasks_11_10_2021" />
+      <config projectName="tasks_11.10.2021" targetName="tasks_11.10.2021" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -11,7 +11,30 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be1ce072-39ea-4fa5-b9bd-f63bdab04831" name="Changes" comment="" />
+    <list default="true" id="be1ce072-39ea-4fa5-b9bd-f63bdab04831" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/tasks_29_11_2021.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex6.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw_11.10.2021/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../hw_11.10.2021/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tasks_15_11_2021/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_15_11_2021/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,10 +66,16 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
-    <configuration name="tasks_11_10_2021" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="tasks_11_10_2021" TARGET_NAME="tasks_11_10_2021" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="tasks_11_10_2021" RUN_TARGET_NAME="tasks_11_10_2021">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tasks_11.10.2021" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="tasks_11.10.2021" TARGET_NAME="tasks_11.10.2021" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="tasks_11.10.2021" RUN_TARGET_NAME="tasks_11.10.2021">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -74,6 +103,9 @@
       <workItem from="1634496666346" duration="6911000" />
       <workItem from="1634523110390" duration="660000" />
       <workItem from="1634679851240" duration="1483000" />
+      <workItem from="1639139997317" duration="212000" />
+      <workItem from="1639140322685" duration="253000" />
+      <workItem from="1639143277120" duration="633000" />
     </task>
     <task id="LOCAL-00001" summary="add task &quot;sum and product of digits a number&quot;">
       <created>1633965917876</created>

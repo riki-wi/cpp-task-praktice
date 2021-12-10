@@ -41,7 +41,7 @@ void distanceToThePoint()
     std::cin >> y3;
     double distanceOne = sqrt((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1));
     double distanceTwo = sqrt((x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2));
-    comparisonIsEqual(distanceOne + distanceTwo, 0.0);
+    comparisonIsEqual(distanceOne + distanceTwo, 10.0);
 }
 
 // sum and product of digits of a number
