@@ -45,58 +45,13 @@ void integralImage(int* mas, int n, int m)
     }
 }
 
-//find in sort mas helper
-int* findInSortMasHelper(int* mas, int f, int left, int right)
+int* findInSortMas(int* mas, size_t n, size_t m, int date)
 {
     int* res;
-    if (left > right) return nullptr;
-    int middle = left + (right - left) / 2;
-    if (f < *(mas + middle))
-    {
-        return findInSortMasHelper(mas, f, left, middle);
-    }
-    else if (f > *(mas + middle))
-    {
-        return findInSortMasHelper(mas, f, middle, right);
-    }
-    else
-    {
-        res = (mas + middle);
-        //std::cout << res << " ";
-        return res;
-    }
-}
 
-//find and sort mas task
-int* findInSortMas(int* mas, int n, int m, int f)
-{
-    return findInSortMasHelper(mas, f, 0, m * n);
-}
-
-
-int* findInSortDiagonalMas(int* mas, int n, int m, int i, int j, int date)
-{
-    int* res = nullptr;
-    for(int k = i, s = j; k < n, s < m; k++, s++)
-    {
-        if (*(mas + k * m + s) == date)
-        {
-            res = (mas + k * m + s);
-            return res;
-        }
-        else if (*(mas + k * m + s) > date)
-        {
-            return findInSortDiagonalMas(mas, n, m, 0, s, date);
-        }
-    }
     return res;
 }
 
-// one and zero task
-void oneAndZero(int* mas, int n, int m)
-{
-
-}
 
 int main()
 {
@@ -133,27 +88,13 @@ int main()
     for(int i = 1; i <= 25; i++)
     {
         std::cout << "find in sort mas: " << i << " " << findInSortMas(&mas2[0][0], 5, 5, i) << " ";
-        std::cout << "find in sort mas with diagonal:  " << i << " " << findInSortDiagonalMas(&mas2[0][0], 5, 5, 0, 0, i) << std::endl;
     }
     std::cout << "===============";
     std::cout << std::endl;
     std::cout << std::endl;
 
     //task three
-    int mas3[4][5] = {
-            {1, 0, 0, 1, 1},
-            {0, 1, 1, 1, 0},
-            {1, 1, 1, 1, 1},
-            {0, 1, 1, 0, 0},
-    };
-    std::cout << "original mas: " << std::endl;
-    printMas(&mas3[0][0], 4, 5);
-    std::cout << std::endl;
-    std::cout << "original mas address: " << std::endl;
-    printMasAddress(&mas3[0][0], 4, 5);
-    std::cout << std::endl;
-    std::cout << "max one mas: " << std::endl;
-    oneAndZero(&mas3[0][0], 4, 5);
+
 
     return 0;
 }

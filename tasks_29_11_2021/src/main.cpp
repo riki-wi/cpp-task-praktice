@@ -40,6 +40,7 @@ bool copyReadWrite(const std::string& nameIn, const std::string& nameOut)
     return true;
 }
 
+/* функция выводит каждый 4-ый байт файла */
 bool printEveryFour(const std::string& name)
 {
     std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
@@ -59,6 +60,7 @@ bool printEveryFour(const std::string& name)
     }
     return true;
 }
+
 
 
 int main(int argc, char* argv[])

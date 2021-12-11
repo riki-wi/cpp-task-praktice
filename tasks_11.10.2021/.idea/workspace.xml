@@ -12,7 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be1ce072-39ea-4fa5-b9bd-f63bdab04831" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/.idea/modules.xml" afterDir="false" />
@@ -27,10 +26,6 @@
       <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex5.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/resources/ex6.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../tasks_29_11_2021/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hw_11.10.2021/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../hw_11.10.2021/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tasks_15_11_2021/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_15_11_2021/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_15_11_2021/src/main.h" afterDir="false" />
@@ -105,7 +100,7 @@
       <workItem from="1634679851240" duration="1483000" />
       <workItem from="1639139997317" duration="212000" />
       <workItem from="1639140322685" duration="253000" />
-      <workItem from="1639143277120" duration="633000" />
+      <workItem from="1639143277120" duration="944000" />
     </task>
     <task id="LOCAL-00001" summary="add task &quot;sum and product of digits a number&quot;">
       <created>1633965917876</created>
@@ -184,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634681245570</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add README.md 11.10.2021">
+      <created>1639144160244</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1639144160246</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +217,7 @@
     <MESSAGE value="add task &quot;disance to the point&quot;" />
     <MESSAGE value="add task &quot;the ratio of the area of a square and a circle, the calculation of pi&quot;" />
     <MESSAGE value="improved input prompt" />
-    <option name="LAST_COMMIT_MESSAGE" value="improved input prompt" />
+    <MESSAGE value="add README.md 11.10.2021" />
+    <option name="LAST_COMMIT_MESSAGE" value="add README.md 11.10.2021" />
   </component>
 </project>
