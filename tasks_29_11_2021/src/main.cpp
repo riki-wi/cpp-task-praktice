@@ -61,6 +61,38 @@ bool printEveryFour(const std::string& name)
     return true;
 }
 
+/* функция получает ширину bmp файла */
+size_t getWidth(const std::string& name)
+{
+    std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
+    if(!fin)
+    {
+        std::cout << "Не удается открыть файл " << name << std::endl;
+        fin.close();
+        return 0;
+    }
+    fin.seekg(18);
+    size_t width = 0;
+    fin.read((char*)&width, 4);
+    return width;
+}
+
+/* функция получает высоту bmp файла */
+size_t getHeight(const std::string& name)
+{
+    std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
+    if(!fin)
+    {
+        std::cout << "Не удается открыть файл " << name << std::endl;
+        fin.close();
+        return 0;
+    }
+    fin.seekg(22);
+    size_t height = 0;
+    fin.read((char*)&height, 4);
+    return height;
+}
+
 
 
 int main(int argc, char* argv[])
@@ -88,5 +120,7 @@ int main(int argc, char* argv[])
 
     copyReadWrite(source, destination);
     printEveryFour(source);
+    std::cout << "Ширина exBMP.bpm " << getWidth("../resources/exBMP.bmp")
+              << " Высота " << getHeight("../resources/exBMP.bmp");
     return 0;
 }
