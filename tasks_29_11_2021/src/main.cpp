@@ -42,7 +42,22 @@ bool copyReadWrite(const std::string& nameIn, const std::string& nameOut)
 
 bool printEveryFour(const std::string& name)
 {
-
+    std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
+    if(!fin)
+    {
+        std::cout << "Не удается открыть файл " << name << std::endl;
+        fin.close();
+        return false;
+    }
+    for(size_t i = 0; i < sizeFile(name); i += 4)
+    {
+        int byte;
+        fin.seekg((long long)i);
+        std::cout << "position: " << fin.tellg();
+        fin.read((char*)&byte, sizeof(char));
+        std::cout << " byte: " << byte << std::endl;
+    }
+    return true;
 }
 
 
@@ -70,5 +85,6 @@ int main(int argc, char* argv[])
     }
 
     copyReadWrite(source, destination);
+    printEveryFour(source);
     return 0;
 }

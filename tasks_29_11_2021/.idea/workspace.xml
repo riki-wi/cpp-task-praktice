@@ -12,20 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85711f93-0259-4d30-b7f7-85d7593c61d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/tasks_29_11_2021.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/ex.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/exOut.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tasks_11.10.2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_11.10.2021/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tasks_1_11_2021/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_1_11_2021/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tasks_1_11_2021/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../tasks_1_11_2021/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,8 +83,16 @@
       <workItem from="1638174361124" duration="8693000" />
       <workItem from="1638197907800" duration="39000" />
       <workItem from="1638511837912" duration="652000" />
-      <workItem from="1639238955629" duration="3127000" />
+      <workItem from="1639238955629" duration="3492000" />
     </task>
+    <task id="LOCAL-00001" summary="add func copyReadWrite">
+      <created>1639243508950</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1639243508951</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,5 +100,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="add func copyReadWrite" />
+    <option name="LAST_COMMIT_MESSAGE" value="add func copyReadWrite" />
   </component>
 </project>
