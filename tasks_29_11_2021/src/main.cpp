@@ -58,7 +58,35 @@ bool printEveryFour(const std::string& name)
         fin.read((char*)&byte, sizeof(char));
         std::cout << " byte: " << byte << std::endl;
     }
+    fin.close();
     return true;
+}
+
+/* запись массива в файл */
+template <typename T>
+void writeMasInFile(const std::string& name, T** mas, size_t n, size_t m)
+{
+    std::ofstream fout(name, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+    fout.write((char*)mas, sizeof(T) * m * n);
+    std::cout << "Записанно " << fout.tellp() << " байт" << std::endl;
+    fout.close();
+}
+
+/* получение эллемента массива из файла по индексу */
+int getElementByIndex(const std::string& name, size_t n, size_t m, size_t indexN, size_t indexM)
+{
+    std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
+    if(!fin)
+    {
+        std::cout << "Не удается открыть файл " << name << std::endl;
+        fin.close();
+        return false;
+    }
+    int res;
+    fin.seekg((long long)(m * indexN + indexM));
+    fin.read((char*)&res, 4);
+    fin.close();
+    return res;
 }
 
 /* функция получает ширину bmp файла */
@@ -74,6 +102,7 @@ size_t getWidth(const std::string& name)
     fin.seekg(18);
     size_t width = 0;
     fin.read((char*)&width, 4);
+    fin.close();
     return width;
 }
 
@@ -90,9 +119,9 @@ size_t getHeight(const std::string& name)
     fin.seekg(22);
     size_t height = 0;
     fin.read((char*)&height, 4);
+    fin.close();
     return height;
 }
-
 
 
 int main(int argc, char* argv[])
@@ -120,7 +149,26 @@ int main(int argc, char* argv[])
 
     copyReadWrite(source, destination);
     printEveryFour(source);
-    std::cout << "Ширина exBMP.bpm " << getWidth("../resources/exBMP.bmp")
-              << " Высота " << getHeight("../resources/exBMP.bmp");
+    std::cout << "Ширина(в байтах) exBMP.bpm = " << getWidth("../resources/exBMP.bmp")
+              << " Высота(в байтах) = " << getHeight("../resources/exBMP.bmp") << std::endl;
+
+
+
+    size_t n = 5;
+    size_t m = 4;
+    int* masDate = new int[n * m];
+    for(size_t i = 0; i < n * m; i++)
+    {
+        masDate[i] = (int)i;
+    }
+    int** mas = new int*[n];
+    for(size_t i = 0, j = 0; i < n * m; i += m, j++)
+    {
+        mas[j] = &masDate[i];
+    }
+    writeMasInFile("../resources/exMas.txt", mas, 5, 4);
+    std::cout << "эллемент с индексом (3 2) = "
+              << getElementByIndex("../resources/exMas.txt", 5, 4, 3, 2)
+              << std::endl;
     return 0;
 }
