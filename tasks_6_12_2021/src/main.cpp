@@ -2,6 +2,7 @@
 #include <fstream>
 #include <random>
 
+
 #pragma pack(push, 1)
 
 struct BITMAPFILEHEADER
@@ -47,7 +48,7 @@ char randInt()
 }
 
 /* функция получает ширину bmp файла */
-size_t getWidth(const std::string& name)
+int32_t getWidth(const std::string& name)
 {
     std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
     if(!fin)
@@ -57,14 +58,14 @@ size_t getWidth(const std::string& name)
         return 0;
     }
     fin.seekg(18);
-    size_t width = 0;
+    int32_t width = 0;
     fin.read((char*)&width, 4);
     fin.close();
     return width;
 }
 
 /* функция получает высоту bmp файла */
-size_t getHeight(const std::string& name)
+int32_t getHeight(const std::string& name)
 {
     std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
     if(!fin)
@@ -74,7 +75,7 @@ size_t getHeight(const std::string& name)
         return 0;
     }
     fin.seekg(22);
-    size_t height = 0;
+    int32_t height = 0;
     fin.read((char*)&height, 4);
     fin.close();
     return height;
@@ -82,7 +83,7 @@ size_t getHeight(const std::string& name)
 
 /* функция получает положение пиксельных данных относительно начала bmp структуры (в байтах)
  * offBits */
-size_t getOffBits(const std::string& name)
+int32_t getOffBits(const std::string& name)
 {
     std::ifstream fin(name, std::ios_base::in | std::ios_base::binary);
     if(!fin)
@@ -92,10 +93,10 @@ size_t getOffBits(const std::string& name)
         return 0;
     }
     fin.seekg(10);
-    size_t height = 0;
-    fin.read((char*)&height, 4);
+    int32_t offBits = 0;
+    fin.read((char*)&offBits, 4);
     fin.close();
-    return height;
+    return offBits;
 }
 
 /* создание рандомной черно-белой(монохронной) картинки с задаными размерами в пикселях */
@@ -150,12 +151,68 @@ void createBlackWhiteBMP(int32_t biWidth, int32_t biHeight, const std::string& p
     fout.close();
 }
 
+void collage(const std::string& pathOne, const std::string& pathTwo)
+{
+    std::string pathBig;
+    std::string pathLittle;
+    if((getHeight(pathTwo) < getWidth(pathOne)) && (getHeight(pathTwo) < getHeight(pathOne)))
+    {
+        pathBig = pathOne;
+        pathLittle = pathTwo;
+    }
+    else if ((getHeight(pathTwo) > getWidth(pathOne)) && (getHeight(pathTwo) > getHeight(pathOne)))
+    {
+        pathLittle = pathOne;
+        pathBig = pathTwo;
+    }
+    else
+    {
+        exit(-1);
+    }
 
+    int32_t offBitsLittle = getOffBits(pathLittle);
+    int32_t offBitsBig = getOffBits(pathBig);
+    std::cout << offBitsBig << " " << offBitsLittle;
+    int size = getHeight(pathLittle) * getWidth(pathLittle) * 3;
+
+    std::ifstream fin(pathLittle, std::ios_base::in | std::ios_base::binary);
+    std::ofstream fout(pathBig, std::ios_base::in | std::ios_base::out | std::ios_base::binary);
+    fin.seekg(offBitsLittle);
+    fout.seekp(0, std::ios::end);
+
+    /*
+    for(int i = 0; i < size; i++)
+    {
+        char bit;
+        fin.read(&bit, 1);
+        fout.write(&bit, 1);
+    }*/
+
+
+
+    for(int j = 0; j < getHeight(pathLittle); j++)
+    {
+        fout.seekp(-(getWidth(pathLittle) + j * getWidth(pathBig) * 3), std::ios::end);
+        for(int i = 0; i < getWidth(pathLittle) * 3; i++)
+        {
+            int* bits;
+            fin.read((char*) &bits, 1);
+            fout.write((char*) &bits, 1);
+        }
+    }
+    fin.seekg(offBitsLittle);
+    fout.seekp(0, std::ios::end);
+
+    fin.close();
+    fout.close();
+}
 
 
 int main()
 {
-    createBlackWhiteBMP(640, 480, "../resources/myBlackWhiteBmp640x480.bmp");
-    createBlackWhiteBMP(100, 50, "../resources/myBlackWhiteBmp100x50.bmp");
+    //createBlackWhiteBMP(640, 480, "../resources/myBlackWhiteBmp640x480.bmp");
+    //createBlackWhiteBMP(100, 50, "../resources/myBlackWhiteBmp100x50.bmp");
+    collage("../resources/bell.bmp", "../resources/snail.bmp");
+
     return 0;
 }
