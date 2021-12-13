@@ -151,6 +151,8 @@ void createBlackWhiteBMP(int32_t biWidth, int32_t biHeight, const std::string& p
     fout.close();
 }
 
+/* функция коллажа, работает только для 8 битных картинок
+ * если различные палитры вставляемая картинка "меняет цвет"*/
 void collage(const std::string& pathOne, const std::string& pathTwo)
 {
     std::string pathBig;
@@ -170,38 +172,26 @@ void collage(const std::string& pathOne, const std::string& pathTwo)
         exit(-1);
     }
 
-    int32_t offBitsLittle = getOffBits(pathLittle);
-    int32_t offBitsBig = getOffBits(pathBig);
-    std::cout << offBitsBig << " " << offBitsLittle;
-    int size = getHeight(pathLittle) * getWidth(pathLittle) * 3;
 
     std::ifstream fin(pathLittle, std::ios_base::in | std::ios_base::binary);
     std::ofstream fout(pathBig, std::ios_base::in | std::ios_base::out | std::ios_base::binary);
-    fin.seekg(offBitsLittle);
+
     fout.seekp(0, std::ios::end);
+    fin.seekg(0, std::ios::end);
 
-    /*
-    for(int i = 0; i < size; i++)
+    for(int j = 1; j <= getHeight(pathLittle); j++)
     {
-        char bit;
-        fin.read(&bit, 1);
-        fout.write(&bit, 1);
-    }*/
-
-
-
-    for(int j = 0; j < getHeight(pathLittle); j++)
-    {
-        fout.seekp(-(getWidth(pathLittle) + j * getWidth(pathBig) * 3), std::ios::end);
-        for(int i = 0; i < getWidth(pathLittle) * 3; i++)
+        fout.seekp(-(getWidth(pathBig) * j + 2), std::ios::end);
+        fin.seekg(-(getWidth(pathLittle) * j + (j - 1)), std::ios::end);
+        for(int i = 0; i < getWidth(pathLittle); i++)
         {
-            int* bits;
-            fin.read((char*) &bits, 1);
-            fout.write((char*) &bits, 1);
+            uint8_t bit;
+            fin.read((char*)& bit, 1);
+            fout.write((char*)& bit, 1);
         }
+        fout.seekp(0, std::ios::end);
+        fin.seekg(0, std::ios::end);
     }
-    fin.seekg(offBitsLittle);
-    fout.seekp(0, std::ios::end);
 
     fin.close();
     fout.close();
@@ -212,7 +202,7 @@ int main()
 {
     //createBlackWhiteBMP(640, 480, "../resources/myBlackWhiteBmp640x480.bmp");
     //createBlackWhiteBMP(100, 50, "../resources/myBlackWhiteBmp100x50.bmp");
-    collage("../resources/bell.bmp", "../resources/snail.bmp");
+    collage("../resources/LAND2.bmp", "../resources/bell.bmp");
 
     return 0;
 }
