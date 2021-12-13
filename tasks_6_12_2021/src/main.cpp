@@ -202,7 +202,7 @@ int main()
 {
     //createBlackWhiteBMP(640, 480, "../resources/myBlackWhiteBmp640x480.bmp");
     //createBlackWhiteBMP(100, 50, "../resources/myBlackWhiteBmp100x50.bmp");
-    collage("../resources/LAND2.bmp", "../resources/bell.bmp");
+    collage("../resources/LAND.bmp", "../resources/bell.bmp");
 
     return 0;
 }
