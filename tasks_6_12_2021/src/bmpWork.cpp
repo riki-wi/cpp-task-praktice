@@ -132,6 +132,25 @@ void printPixelHex(PICTURE picture)
     }
 }
 
+// неправельный поряок rgb должен быть bgr;
+void swapRG(const std::string& pathIn)
+{
+    PICTURE pct = readBMP(pathIn);
+
+    for(size_t i = 0; i < 3 * pct.bMIH.biHeight * pct.bMIH.biWidth; i += 3)
+    {
+        PIXEL24 pixel = getPixel24(pct.pixel, pct.bMIH.biWidth, pct.bMIH.biHeight, i, 0);
+        PIXEL24 res;
+        res.green = pixel.read;
+        res.blue = pixel.blue;
+        res.read = pixel.green;
+
+        setPixel24(pct.pixel, pct.bMIH.biWidth, pct.bMIH.biHeight, i, 0, res);
+    }
+
+    writeBMP(pct, pathIn);
+}
+
 
 PIXEL24 getPixel24(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate)
 {

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 
-
 #ifndef TASKS_6_12_2021_BMPWORK_H
 #pragma pack(push, 1)
 
@@ -47,9 +46,9 @@ struct PIXEL24
 
 struct PICTURE
 {
-    struct BITMAPFILEHEADER bMFH;
-    struct BITMAPINFOHEADER bMIH;
-    struct BITMAPCOLORTABLE *bMCT;
+    BITMAPFILEHEADER bMFH;
+    BITMAPINFOHEADER bMIH;
+    BITMAPCOLORTABLE *bMCT;
     uint8_t *pixel;
 }typedef PICTURE;
 
@@ -66,7 +65,11 @@ PICTURE readBMP(const std::string& path);
 void writeBMP(PICTURE picture, const std::string& path);
 void printPixelHex(PICTURE picture);
 
+void swapRG(const std::string& path);
+
 void collage24(const std::string& pathOne, const std::string& pathTwo);
+
+void mask(const std::string& pathIn, const std::string& pathOut, const double* mask, int dev, int sizeMask);
 
 #define TASKS_6_12_2021_BMPWORK_H
 
