@@ -49,7 +49,7 @@ struct PICTURE
 {
     struct BITMAPFILEHEADER bMFH;
     struct BITMAPINFOHEADER bMIH;
-    struct BITMAPCOLORTABLE bMCT;
+    struct BITMAPCOLORTABLE *bMCT;
     uint8_t *pixel;
 }typedef PICTURE;
 
