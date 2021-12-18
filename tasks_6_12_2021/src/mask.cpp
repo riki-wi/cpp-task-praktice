@@ -1,5 +1,5 @@
 #include "bmpWork.h"
-
+/*
 // пока только для картинко с bitcount = 24;
 void mask(const std::string& pathIn, const std::string& pathOut, const double* mask, int dev, int sizeMask)
 {
@@ -50,3 +50,4 @@ void mask(const std::string& pathIn, const std::string& pathOut, const double* m
     out.pixel = output;
     writeBMP(out, pathOut);
 }
+ */

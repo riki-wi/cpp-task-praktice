@@ -31,14 +31,8 @@ PICTURE readBMP(const std::string& path)
 
     if(res.bMIH.biBitCount == 1)
     {
-        fin.read((char*)&res.bMCT, res.bMFH.bfOffBits - 54);
-        res.pixel = new uint8_t[res.bMIH.biWidth * res.bMIH.biHeight / 8];
-        fin.read((char*)res.pixel, res.bMIH.biWidth * res.bMIH.biHeight / 8);
-    }
-    else if(res.bMIH.biBitCount == 8)
-    {
         res.bMCT = new BITMAPCOLORTABLE[res.bMIH.biColorsUsed];
-        for(size_t i = 0; i < res.bMIH.biColorsUsed; i++)
+        for(size_t i = 0; i < (res.bMFH.bfSize - res.bMIH.biImageSize - 54) / 4; i++)
         {
             fin.read((char*)&res.bMCT[i].red, 1);
             fin.read((char*)&res.bMCT[i].green, 1);
@@ -46,13 +40,27 @@ PICTURE readBMP(const std::string& path)
             fin.read((char*)&res.bMCT[i].reserved, 1);
         }
 
-        res.pixel = new uint8_t[res.bMIH.biWidth * res.bMIH.biHeight];
-        fin.read((char*)res.pixel, res.bMIH.biWidth * res.bMIH.biHeight);
+        res.pixel = new int8_t[res.bMIH.biImageSize];
+        fin.read((char*)res.pixel, res.bMIH.biImageSize);
+    }
+    else if(res.bMIH.biBitCount == 8)
+    {
+        res.bMCT = new BITMAPCOLORTABLE[res.bMIH.biColorsUsed];
+        for(size_t i = 0; i < (res.bMFH.bfSize - res.bMIH.biImageSize - 54) / 4; i++)
+        {
+            fin.read((char*)&res.bMCT[i].red, 1);
+            fin.read((char*)&res.bMCT[i].green, 1);
+            fin.read((char*)&res.bMCT[i].blue, 1);
+            fin.read((char*)&res.bMCT[i].reserved, 1);
+        }
+
+        res.pixel = new int8_t[res.bMIH.biImageSize];
+        fin.read((char*)res.pixel, res.bMIH.biImageSize);
     }
     else if(res.bMIH.biBitCount == 24)
     {
-        res.pixel = new uint8_t[3 * res.bMIH.biWidth * res.bMIH.biHeight];
-        fin.read((char*)res.pixel, 3 * res.bMIH.biWidth * res.bMIH.biHeight);
+        res.pixel = new int8_t[res.bMIH.biImageSize];
+        fin.read((char*)res.pixel, res.bMIH.biImageSize);
     }
 
     fin.close();
@@ -68,6 +76,7 @@ void writeBMP(PICTURE picture, const std::string& path)
         fout.close();
         exit(-1);
     }
+
 
     fout.write((char*)& picture.bMFH.bfType, 2);
     fout.write((char*)& picture.bMFH.bfSize, 4);
@@ -89,8 +98,14 @@ void writeBMP(PICTURE picture, const std::string& path)
 
     if(picture.bMIH.biBitCount == 1)
     {
-        fout.write((char*)&picture.bMCT, picture.bMFH.bfOffBits - 54);
-        fout.write((char*)picture.pixel, picture.bMIH.biWidth * picture.bMIH.biHeight / 8);
+        for(size_t i = 0; i < (picture.bMFH.bfSize - picture.bMIH.biImageSize - 54) / 4; i++)
+        {
+            fout.write((char*)&picture.bMCT[i].red, 1);
+            fout.write((char*)&picture.bMCT[i].green, 1);
+            fout.write((char*)&picture.bMCT[i].blue, 1);
+            fout.write((char*)&picture.bMCT[i].reserved, 1);
+        }
+        fout.write((char*)picture.pixel, picture.bMIH.biImageSize);
     }
     else if(picture.bMIH.biBitCount == 8)
     {
@@ -101,12 +116,12 @@ void writeBMP(PICTURE picture, const std::string& path)
             fout.write((char*)&picture.bMCT[i].blue, 1);
             fout.write((char*)&picture.bMCT[i].reserved, 1);
         }
-        fout.write((char*)picture.pixel, picture.bMIH.biWidth * picture.bMIH.biHeight);
+        fout.write((char*)picture.pixel, picture.bMIH.biImageSize);
     }
 
     else if(picture.bMIH.biBitCount == 24)
     {
-        fout.write((char*)picture.pixel, 3 * picture.bMIH.biWidth * picture.bMIH.biHeight);
+        fout.write((char*)picture.pixel, picture.bMIH.biImageSize);
     }
     fout.close();
 }
@@ -131,6 +146,7 @@ void printPixelHex(PICTURE picture)
     }
 }
 
+/*
 // неправельный поряок rgb должен быть bgr;
 void swapRG(const std::string& pathIn)
 {
@@ -149,7 +165,7 @@ void swapRG(const std::string& pathIn)
 
     writeBMP(pct, pathIn);
 }
-
+*/
 
 PIXEL24 getPixel24(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate)
 {

@@ -1,5 +1,5 @@
 #include "bmpWork.h"
-
+/*
 void collage24(const std::string& pathOne, const std::string& pathTwo)
 {
     PICTURE pctOne = readBMP(pathOne);
@@ -44,3 +44,4 @@ void collage24(const std::string& pathOne, const std::string& pathTwo)
     }
     writeBMP(*pctBig, pathBig);
 }
+ */

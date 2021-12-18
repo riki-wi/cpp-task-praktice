@@ -6,42 +6,42 @@
 
 struct BITMAPFILEHEADER
 {
-    uint16_t bfType;
-    uint32_t bfSize;
-    uint16_t bfReserved1;
-    uint16_t bfReserved2;
-    uint32_t bfOffBits;
+    int16_t bfType;
+    int32_t bfSize;
+    int16_t bfReserved1;
+    int16_t bfReserved2;
+    int32_t bfOffBits;
 }typedef BITMAPFILEHEADER;
 
 struct BITMAPINFOHEADER
 {
-    uint32_t biSize;
-    uint32_t biWidth;
-    uint32_t biHeight;
-    uint16_t biPlanes;
-    uint16_t biBitCount;
-    uint32_t biCompressions;
-    uint32_t biImageSize;
-    uint32_t biXPelsPerMeter;
-    uint32_t biYPelsPerMeter;
-    uint32_t biColorsUsed;
-    uint32_t biColorsImportant;
+    int32_t biSize;
+    int32_t biWidth;
+    int32_t biHeight;
+    int16_t biPlanes;
+    int16_t biBitCount;
+    int32_t biCompressions;
+    int32_t biImageSize;
+    int32_t biXPelsPerMeter;
+    int32_t biYPelsPerMeter;
+    int32_t biColorsUsed;
+    int32_t biColorsImportant;
 }typedef BITMAPINFOHEADER;
 
 /* only BitCount <= 8 */
 struct BITMAPCOLORTABLE
 {
-    uint8_t red;
-    uint8_t green;
-    uint8_t blue;
-    uint8_t reserved;
+    int8_t red;
+    int8_t green;
+    int8_t blue;
+    int8_t reserved;
 }typedef BITMAPCOLORTABLE;
 
 struct PIXEL24
 {
-    uint8_t read;
-    uint8_t green;
-    uint8_t blue;
+    int8_t read;
+    int8_t green;
+    int8_t blue;
 }typedef PIXEL24;
 
 struct PICTURE
@@ -49,7 +49,7 @@ struct PICTURE
     BITMAPFILEHEADER bMFH;
     BITMAPINFOHEADER bMIH;
     BITMAPCOLORTABLE *bMCT;
-    uint8_t *pixel;
+    int8_t *pixel;
 }typedef PICTURE;
 
 #pragma pack(pop)
