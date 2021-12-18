@@ -62,25 +62,6 @@ void snake(int** mas, int n, int m)
     deleteDimensionMas(mas, n, m);
 }
 
-//filling an array with diagonal a snake
-void snakeDiagonal(int** mas, int n, int m)
-{
-    int date = 0;
-    for(int diag = 0; diag < n + m; diag++)
-    {
-        if(diag % 2)
-        {
-            continue;
-        }
-        else
-        {
-
-        }
-    }
-
-
-    printDimensionalMas(mas, n, m);
-}
 
 
 //filling an array with diagonal a snake
@@ -127,9 +108,6 @@ int main()
 
     snake(creatIndependentTwoDimensionalMas(n, m), n, m);
 
-    std::cout << std::endl;
-    std::cout << std::endl;
-    snakeDiagonal(createDependentTwoDimensionalMas(n, m), n, m);
 
     std::cout << std::endl;
     std::cout << std::endl;

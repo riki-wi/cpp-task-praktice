@@ -14,8 +14,7 @@ int main()
 
     swapRG("../resources/swap/exampleB1.bmp"); */
 
-    collage24("../resources/collage/24/24_31x32.bmp", "../resources/collage/24/land4.bmp");
-    collage24("../resources/collage/24/24_10x10.bmp", "../resources/collage/24/land4.bmp");
+    collage24("../resources/collage/24/24_31x32.bmp", "../resources/collage/24/land.bmp");
     collage24("../resources/collage/24/24_256*256.bmp", "../resources/collage/24/land.bmp");
 
     return 0;
