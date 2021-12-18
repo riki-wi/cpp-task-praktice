@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include "../src/main.cpp"
 
 //вывод результатов теста
@@ -142,6 +143,38 @@ bool initializationByOneMainDiagonalTestOne()
     return res;
 }
 
+bool transposeIndependentArrayTest()
+{
+    bool res;
+    int** real = createDependentTwoDimensionalMas<int>(3, 2);
+    for(int i = 0; i < 3; i++)
+        for(int j = 0; j < 2; j++)
+            real[i][j] = (i + j);
+    auto** test = new int*[2]{new int[3]{0, 1, 2}, new int[3]{1, 2, 3}};
+
+    res = assertEqMas<int>(test, 2, 3, transposeDependentArray(real, 3, 2), 2, 3);
+
+    checkRes(res, __func__ );
+    deleteDimensionMas(test, 2, 3);
+
+    return res;
+}
+
+bool transposeDependentArrayTest()
+{
+    bool res;
+    int** real = createDependentTwoDimensionalMas<int>(2, 3);
+    for(int i = 0; i < 2; i++)
+        for(int j = 0; j < 3; j++)
+            real[i][j] = (i + j);
+    auto** test = new int*[3]{new int[2]{0, 1}, new int[2]{1, 2}, new int[2]{2, 3}};
+
+    res = assertEqMas<int>(test, 3, 2, transposeDependentArray(real, 2, 3), 3, 2);
+
+    checkRes(res, __func__ );
+
+    return res;
+}
 
 
 int main()
@@ -155,6 +188,9 @@ int main()
     func.emplace_back(multiplyingByNumberTestOne);
 
     func.emplace_back(initializationByOneMainDiagonalTestOne);
+
+    func.emplace_back(transposeIndependentArrayTest);
+    func.emplace_back(transposeDependentArrayTest);
 
 
     for(auto & i : func)

@@ -132,6 +132,7 @@ T** turnArray180(T** mas, size_t n, size_t m)
             mas[i][j] = tmp;
         }
     }
+    return mas;
 }
 
 /*Создание матрицы, как результата умножения матрицы на число
@@ -279,13 +280,51 @@ T& getElement(T** mas, size_t n, size_t m, size_t row, size_t column)
 /* алгоритм Гаусса приведения матрицы к диагональному виду */
 void gauss(double** mas, size_t n, size_t m)
 {
-
+    double d;
+    for (size_t i = 0; i < n; i++)
+    {
+        d = mas[i][i];
+        for (size_t j = n; j >= i; j--)
+            mas[i][j] /= d;
+        for (size_t j = i + 1; j < n; j++)
+        {
+            d = mas[j][i];
+            for (size_t k = n; k >= i; k--)
+                mas[j][k] -= d * mas[i][k];
+        }
+    }
 }
 
 /* вычисление определителя квадратной матрицы */
 double determinant(double** mas, size_t n)
 {
-    double res = 0;
+    if(n < 1) exit(-1);
 
+    if(n == 1)
+    {
+        return mas[0][0];
+    }
+
+    if(n == 2)
+    {
+        return mas[0][0] * mas[1][1] - mas[1][0] * mas[0][1];
+    }
+
+    auto** helper = new double*[n - 1];
+    double res = 0;
+    int sign = 1;
+    int k = 0;
+    for(size_t i = 0; i < n; i++)
+    {
+        for(size_t j = 0; j < n; j++)
+        {
+            if(i != j)
+                helper[k++] = mas[j] + 1;
+        }
+        res += sign * mas[i][0] * determinant(helper, n - 1);
+        sign *= -1;
+    }
+
+    delete [] helper;
     return res;
 }

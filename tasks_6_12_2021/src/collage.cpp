@@ -39,7 +39,7 @@ void collage24(const std::string& pathOne, const std::string& pathTwo)
         {
             PIXEL24 pixel = getPixel24(pctLittle->pixel, pctLittle->bMIH.biWidth, pctLittle->bMIH.biHeight, j, i);
             uint32_t height = pctBig->bMIH.biHeight - pctLittle->bMIH.biHeight + i;
-            setPixel24(pctBig->pixel, pctBig->bMIH.biWidth, pctBig->bMIH.biHeight, j + 3 * height, height, pixel);
+            setPixel24(pctBig->pixel, pctBig->bMIH.biWidth, pctBig->bMIH.biHeight, j, height, pixel);
         }
     }
     writeBMP(*pctBig, pathBig);

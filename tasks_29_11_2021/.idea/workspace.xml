@@ -12,9 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85711f93-0259-4d30-b7f7-85d7593c61d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/exMas.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/exMas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/exMas.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +89,7 @@
       <workItem from="1638174361124" duration="8693000" />
       <workItem from="1638197907800" duration="39000" />
       <workItem from="1638511837912" duration="652000" />
-      <workItem from="1639238955629" duration="9919000" />
+      <workItem from="1639238955629" duration="10477000" />
     </task>
     <task id="LOCAL-00001" summary="add func copyReadWrite">
       <created>1639243508950</created>
@@ -120,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639246951547</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="добавлены функции writeMasInFile">
+      <created>1639315391758</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1639315391758</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +138,7 @@
     <MESSAGE value="add function printEveryFour" />
     <MESSAGE value="незначительные изменения" />
     <MESSAGE value="добавлены функции получения высоты и ширины bmp файла" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавлены функции получения высоты и ширины bmp файла" />
+    <MESSAGE value="добавлены функции writeMasInFile" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлены функции writeMasInFile" />
   </component>
 </project>

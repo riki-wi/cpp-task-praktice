@@ -113,12 +113,11 @@ void writeBMP(PICTURE picture, const std::string& path)
 
 void printPixelHex(PICTURE picture)
 {
-    uint8_t n = 0;
+    int n;
     if(picture.bMIH.biBitCount == 24)
     {
         n = 3;
     }
-
     for(size_t i = 0; i < picture.bMIH.biWidth * picture.bMIH.biHeight * n; i++)
     {
         if(i % 30)

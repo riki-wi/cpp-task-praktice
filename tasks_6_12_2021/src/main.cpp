@@ -2,7 +2,7 @@
 
 int main()
 {
-
+    /*
     PICTURE pct1 = readBMP("../resources/copy/1in.bmp");
     writeBMP(pct1, "../resources/copy/1out.bmp");
 
@@ -12,7 +12,11 @@ int main()
     PICTURE pct24 = readBMP("../resources/copy/8in.bmp");
     writeBMP(pct24, "../resources/copy/8out.bmp");
 
-    swapRG("../resources/swap/exampleB1.bmp");
+    swapRG("../resources/swap/exampleB1.bmp"); */
+
+    collage24("../resources/collage/24/24_31x32.bmp", "../resources/collage/24/land4.bmp");
+    collage24("../resources/collage/24/24_10x10.bmp", "../resources/collage/24/land4.bmp");
+    collage24("../resources/collage/24/24_256*256.bmp", "../resources/collage/24/land.bmp");
 
     return 0;
 }
