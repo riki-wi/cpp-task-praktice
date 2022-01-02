@@ -29,6 +29,13 @@ PICTURE readBMP(const std::string& path)
     fin.read((char*)& res.bMIH.biColorsUsed, 4);
     fin.read((char*)& res.bMIH.biColorsImportant, 4);
 
+    if(!res.bMIH.biImageSize)
+    {
+        std::cout << "Невозможно прочитать изображение" << std::endl;
+        fin.close();
+        exit(-1);
+    }
+
     if(res.bMIH.biBitCount == 1)
     {
         res.bMCT = new BITMAPCOLORTABLE[res.bMIH.biColorsUsed];
@@ -40,7 +47,7 @@ PICTURE readBMP(const std::string& path)
             fin.read((char*)&res.bMCT[i].reserved, 1);
         }
 
-        res.pixel = new int8_t[res.bMIH.biImageSize];
+        res.pixel = new uint8_t[res.bMIH.biImageSize];
         fin.read((char*)res.pixel, res.bMIH.biImageSize);
     }
     else if(res.bMIH.biBitCount == 8)
@@ -54,13 +61,20 @@ PICTURE readBMP(const std::string& path)
             fin.read((char*)&res.bMCT[i].reserved, 1);
         }
 
-        res.pixel = new int8_t[res.bMIH.biImageSize];
+        res.pixel = new uint8_t[res.bMIH.biImageSize];
         fin.read((char*)res.pixel, res.bMIH.biImageSize);
     }
     else if(res.bMIH.biBitCount == 24)
     {
-        res.pixel = new int8_t[res.bMIH.biImageSize];
+        res.pixel = new uint8_t[res.bMIH.biImageSize];
         fin.read((char*)res.pixel, res.bMIH.biImageSize);
+    }
+
+    else
+    {
+        std::cout << "Невозможно прочитать изображение" << std::endl;
+        fin.close();
+        exit(-1);
     }
 
     fin.close();
@@ -77,6 +91,12 @@ void writeBMP(PICTURE picture, const std::string& path)
         exit(-1);
     }
 
+    if(!picture.bMIH.biImageSize)
+    {
+        std::cout << "Невозможно записать изображение" << std::endl;
+        fout.close();
+        exit(-1);
+    }
 
     fout.write((char*)& picture.bMFH.bfType, 2);
     fout.write((char*)& picture.bMFH.bfSize, 4);
@@ -123,19 +143,22 @@ void writeBMP(PICTURE picture, const std::string& path)
     {
         fout.write((char*)picture.pixel, picture.bMIH.biImageSize);
     }
+
+    else
+    {
+        std::cout << "Невозможно записать изображение" << std::endl;
+        fout.close();
+        exit(-1);
+    }
+
     fout.close();
 }
 
 void printPixelHex(PICTURE picture)
 {
-    int n;
-    if(picture.bMIH.biBitCount == 24)
+    for(size_t i = 0; i < picture.bMIH.biImageSize; i++)
     {
-        n = 3;
-    }
-    for(size_t i = 0; i < picture.bMIH.biWidth * picture.bMIH.biHeight * n; i++)
-    {
-        if(i % 30)
+        if(i % 32)
         {
             std::cout << translation(picture.pixel[i]) << " ";
         }
@@ -146,39 +169,36 @@ void printPixelHex(PICTURE picture)
     }
 }
 
-/*
-// неправельный поряок rgb должен быть bgr;
+
 void swapRG(const std::string& pathIn)
 {
     PICTURE pct = readBMP(pathIn);
-
-    for(size_t i = 0; i < 3 * pct.bMIH.biHeight * pct.bMIH.biWidth; i += 3)
+    for(size_t i = 0; i < pct.bMIH.biImageSize; i += 3)
     {
         PIXEL24 pixel = getPixel24(pct.pixel, pct.bMIH.biWidth, pct.bMIH.biHeight, i, 0);
         PIXEL24 res;
-        res.green = pixel.read;
+        res.green = pixel.red;
         res.blue = pixel.blue;
-        res.read = pixel.green;
+        res.red = pixel.green;
 
         setPixel24(pct.pixel, pct.bMIH.biWidth, pct.bMIH.biHeight, i, 0, res);
     }
-
     writeBMP(pct, pathIn);
 }
-*/
 
 PIXEL24 getPixel24(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate)
 {
     PIXEL24 res;
-    res.read = date[3 * width * heightDate + widthDate];
+    res.blue = date[3 * width * heightDate + widthDate];
     res.green = date[3 * width * heightDate + widthDate + 1];
-    res.blue = date[3 * width * heightDate + widthDate + 2];
+    res.red = date[3 * width * heightDate + widthDate + 2];
     return res;
 }
 
 void setPixel24(unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate, PIXEL24 pixel)
 {
-    date[3 * width * heightDate + widthDate] = pixel.read;
+    date[3 * width * heightDate + widthDate] = pixel.blue;
     date[3 * width * heightDate + widthDate + 1] = pixel.green;
-    date[3 * width * heightDate + widthDate + 2] = pixel.blue;
+    date[3 * width * heightDate + widthDate + 2] = pixel.red;
+
 }

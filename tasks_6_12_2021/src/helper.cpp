@@ -2,7 +2,7 @@
 
 std::string checkNumberForTranslation(int x)
 {
-    switch (x)
+    switch (abs(x))
     {
         case 0: return "0";
         case 10: return "A";
@@ -11,7 +11,7 @@ std::string checkNumberForTranslation(int x)
         case 13: return "D";
         case 14: return "E";
         case 15: return "F";
-        default: return std::to_string(x);
+        default: return std::to_string(abs(x));
     }
 }
 

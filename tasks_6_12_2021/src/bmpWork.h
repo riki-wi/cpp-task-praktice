@@ -39,9 +39,9 @@ struct BITMAPCOLORTABLE
 
 struct PIXEL24
 {
-    int8_t read;
-    int8_t green;
-    int8_t blue;
+    uint8_t blue;
+    uint8_t green;
+    uint8_t red;
 }typedef PIXEL24;
 
 struct PICTURE
@@ -49,7 +49,7 @@ struct PICTURE
     BITMAPFILEHEADER bMFH;
     BITMAPINFOHEADER bMIH;
     BITMAPCOLORTABLE *bMCT;
-    int8_t *pixel;
+    uint8_t *pixel;
 }typedef PICTURE;
 
 #pragma pack(pop)

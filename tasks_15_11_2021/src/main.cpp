@@ -14,6 +14,10 @@ T** createInDependentTwoDimensionalMas(size_t n, size_t m)
     return mas;
 }
 
+for(int i = 0; i < r; i++)
+    for(int j = 0; j < c; j++)
+        A[j * r + i] = B[];
+
 /* Создание двумерного массива, лежащего
  * в памяти "одной строкой" */
 template <typename T>
