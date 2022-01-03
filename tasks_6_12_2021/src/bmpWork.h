@@ -54,7 +54,6 @@ struct PICTURE
 
 #pragma pack(pop)
 
-char randInt();
 std::string translation(unsigned long long);
 std::string checkNumberForTranslation(int x);
 
@@ -67,7 +66,10 @@ void printPixelHex(PICTURE picture);
 
 void swapRG(const std::string& path);
 
-void collage24(const std::string& pathOne, const std::string& pathTwo);
+void collage(const std::string& pathOne, const std::string& pathTwo);
+void collage24(PICTURE pctLittle, PICTURE pctBig, const std::string& pathBig);
+void collage8(PICTURE pctLittle, PICTURE pctBig, const std::string& pathBig);
+void collage1(PICTURE pctLittle, PICTURE pctBig, const std::string& pathBig);
 
 void mask(const std::string& pathIn, const std::string& pathOut, const double* mask, int dev, int sizeMask);
 

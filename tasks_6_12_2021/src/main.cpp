@@ -27,9 +27,8 @@ int main()
     swapRG("../resources/swap/exampleG1.bmp");
     swapRG("../resources/swap/exampleR1.bmp");
 
-
-
-
-
+    //collage
+    collage("../resources/collage/24/24_31x32.bmp", "../resources/collage/24/24_171x147.bmp");
+    collage("../resources/collage/24/24_512x512.bmp", "../resources/collage/24/24_171x147.bmp");
     return 0;
 }

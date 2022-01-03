@@ -29,9 +29,12 @@ PICTURE readBMP(const std::string& path)
     fin.read((char*)& res.bMIH.biColorsUsed, 4);
     fin.read((char*)& res.bMIH.biColorsImportant, 4);
 
+    res.bMIH.biWidth = abs(res.bMIH.biWidth);
+    res.bMIH.biHeight = abs(res.bMIH.biHeight);
+
     if(!res.bMIH.biImageSize)
     {
-        std::cout << "Невозможно прочитать изображение" << std::endl;
+        std::cout << "Невозможно прочитать изображение" << path << std::endl;
         fin.close();
         exit(-1);
     }
@@ -72,7 +75,7 @@ PICTURE readBMP(const std::string& path)
 
     else
     {
-        std::cout << "Невозможно прочитать изображение" << std::endl;
+        std::cout << "Невозможно прочитать изображение " << path << std::endl;
         fin.close();
         exit(-1);
     }
@@ -93,7 +96,7 @@ void writeBMP(PICTURE picture, const std::string& path)
 
     if(!picture.bMIH.biImageSize)
     {
-        std::cout << "Невозможно записать изображение" << std::endl;
+        std::cout << "Невозможно записать изображение " << path << std::endl;
         fout.close();
         exit(-1);
     }
@@ -173,7 +176,14 @@ void printPixelHex(PICTURE picture)
 void swapRG(const std::string& pathIn)
 {
     PICTURE pct = readBMP(pathIn);
-    for(size_t i = 0; i < pct.bMIH.biImageSize; i += 3)
+
+    if(pct.bMIH.biBitCount != 24)
+    {
+        std::cout << "Неверная битность изображений";
+        exit(-1);
+    }
+
+    for(size_t i = 0; i < pct.bMIH.biImageSize; i++)
     {
         PIXEL24 pixel = getPixel24(pct.pixel, pct.bMIH.biWidth, pct.bMIH.biHeight, i, 0);
         PIXEL24 res;
@@ -189,16 +199,15 @@ void swapRG(const std::string& pathIn)
 PIXEL24 getPixel24(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate)
 {
     PIXEL24 res;
-    res.blue = date[3 * width * heightDate + widthDate];
-    res.green = date[3 * width * heightDate + widthDate + 1];
-    res.red = date[3 * width * heightDate + widthDate + 2];
+    res.blue = date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4)];
+    res.green = date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4) + 1];
+    res.red = date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4) + 2];
     return res;
 }
 
 void setPixel24(unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate, PIXEL24 pixel)
 {
-    date[3 * width * heightDate + widthDate] = pixel.blue;
-    date[3 * width * heightDate + widthDate + 1] = pixel.green;
-    date[3 * width * heightDate + widthDate + 2] = pixel.red;
-
+    date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4)] = pixel.blue;
+    date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4) + 1] = pixel.green;
+    date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4) + 2] = pixel.red;
 }
