@@ -211,3 +211,13 @@ void setPixel24(unsigned char *date, size_t width, size_t height, size_t widthDa
     date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4) + 1] = pixel.green;
     date[3 * (width) * heightDate + 3 * widthDate + heightDate * (width % 4) + 2] = pixel.red;
 }
+
+uint8_t getPixel8(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate)
+{
+    return date[3 * (width) * heightDate + 3 * widthDate + heightDate * (3 * width % 4)];
+}
+
+void setPixel8(unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate, uint8_t pixel)
+{
+    date[3 * (width) * heightDate + 3 * widthDate + heightDate * (3 * width % 4)] = pixel;
+}

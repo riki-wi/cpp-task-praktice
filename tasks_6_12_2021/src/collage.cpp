@@ -67,7 +67,16 @@ void collage24(PICTURE pctLittle, PICTURE pctBig, const std::string& pathBig)
 
 void collage8(PICTURE pctLittle, PICTURE pctBig, const std::string& pathBig)
 {
-
+    for(size_t i = 0; i < abs(pctLittle.bMIH.biHeight); i++)
+    {
+        for(size_t j = 0; j < abs(pctLittle.bMIH.biWidth); j++)
+        {
+            uint8_t pixel = getPixel8(pctLittle.pixel, pctLittle.bMIH.biWidth, pctLittle.bMIH.biHeight, j, i);
+            uint32_t height = pctBig.bMIH.biHeight - pctLittle.bMIH.biHeight + i;
+            setPixel8(pctBig.pixel, pctBig.bMIH.biWidth, pctBig.bMIH.biHeight, j, height, pixel);
+        }
+    }
+    writeBMP(pctBig, pathBig);
 }
 
 void collage1(PICTURE pctLittle, PICTURE pctBig, const std::string& pathBig)

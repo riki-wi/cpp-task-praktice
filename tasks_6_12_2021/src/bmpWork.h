@@ -60,6 +60,9 @@ std::string checkNumberForTranslation(int x);
 PIXEL24 getPixel24(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate);
 void setPixel24(unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate, PIXEL24 pixel);
 
+uint8_t getPixel8(const unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate);
+void setPixel8(unsigned char *date, size_t width, size_t height, size_t widthDate, size_t heightDate, uint8_t pixel);
+
 PICTURE readBMP(const std::string& path);
 void writeBMP(PICTURE picture, const std::string& path);
 void printPixelHex(PICTURE picture);
