@@ -1,0 +1,4 @@
+#ifndef SIMPLE_LIST_LIST_H
+#define SIMPLE_LIST_LIST_H
+
+#endif //SIMPLE_LIST_LIST_H
