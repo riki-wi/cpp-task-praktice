@@ -12,6 +12,44 @@ private:
     int size;
 
 public:
+    Arr()
+    {
+        this->size = 0;
+        this->mas = new T[size];
+    }
+
+    explicit Arr(int size)
+    {
+        this->size = size;
+        this->mas = new T[size];
+    }
+
+    Arr(int size, const T& init)
+    {
+        this->size = size;
+        this->mas = new T[size];
+        for(int i = 0; i < size; i++)
+        {
+            mas[i] = init;
+        }
+    }
+
+    Arr(const Arr& other)
+    {
+        this->size = other.size;
+        this->mas = new T[other.size];
+
+        for(int i = 0; i < other.size; i++)
+        {
+            this->mas[i] = other.mas[i];
+        }
+    }
+
+    ~Arr()
+    {
+        delete [] this->mas;
+    }
+
     T& operator[](int index)
     {
         if(index < 0 || size <= index)
@@ -19,36 +57,21 @@ public:
         return mas[index];
     }
 
-    Arr()
-    {
-        Arr<T>::size = 0;
-        Arr<T>::mas = new T[size];
-    }
-
-    explicit Arr(int size)
-    {
-        Arr<T>::size = size;
-        Arr<T>::mas = new T[size];
-    }
-
-    Arr(int size, T init)
-    {
-        Arr<T>::size = size;
-        Arr<T>::mas = new T[size];
-        for(int i = 0; i < size; i++)
-        {
-            mas[i] = init;
-        }
-    }
-
-    T getElement(int index)
+    const T& operator[](int index) const
     {
         if(index < 0 || size <= index)
             throw IndexException();
         return mas[index];
     }
 
-    int getSize()
+    T getElement(int index) const
+    {
+        if(index < 0 || size <= index)
+            throw IndexException();
+        return mas[index];
+    }
+
+    int getSize() const
     {
         return size;
     }
@@ -63,18 +86,18 @@ public:
             return;
         }
 
+        int min = size < newSize ?  size : newSize;
         T* newMas = new T[newSize];
-        for(int i = 0; i < std::min(size, newSize); i++)
+        for(int i = 0; i < min; i++)
         {
             newMas[i] = mas[i];
         }
-
+        delete [] mas;
         mas = newMas;
-        delete [] newMas;
         size = newSize;
     }
 
-    void addElem(T elem)
+    void addElem(const T& elem)
     {
         resize(size + 1);
         mas[size - 1] = elem;
@@ -96,8 +119,8 @@ public:
             }
             newMas[i] = mas[i + helpIndex];
         }
+        delete [] mas;
         mas = newMas;
-        delete [] newMas;
         size--;
     }
 };

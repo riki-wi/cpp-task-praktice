@@ -68,15 +68,10 @@ TEST_F(TestArr, TestAddElement)
 
 TEST_F(TestArr, TestRemoveElement)
 {
-    for(int i = 0; i < masWithSize.getSize(); i++)
+    int size = masWithSize.getSize();
+    for(int i = size - 1; i >= 0; i--)
     {
         masWithSize.removeElem(i);
     }
     ASSERT_THROW(masWithSize[0], IndexException);
-}
-
-int main(int argc, char** argv)
-{
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }
