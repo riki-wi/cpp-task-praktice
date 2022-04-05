@@ -12,42 +12,74 @@ private:
     int size;
 
 public:
-    Arr()
-    {
-        this->size = 0;
-        this->mas = new T[size];
-    }
+    Arr(): size(0), mas(new T[0]){}
 
-    explicit Arr(int size)
-    {
-        this->size = size;
-        this->mas = new T[size];
-    }
+    explicit Arr(int size): size(size), mas(new T[size]){}
 
-    Arr(int size, const T& init)
+    Arr(int size, const T& init): size(size), mas(new T[size])
     {
-        this->size = size;
-        this->mas = new T[size];
         for(int i = 0; i < size; i++)
         {
             mas[i] = init;
         }
     }
 
-    Arr(const Arr& other)
+    Arr(const Arr& other): size(other.size), mas(new T[other.size])
     {
-        this->size = other.size;
-        this->mas = new T[other.size];
-
         for(int i = 0; i < other.size; i++)
         {
             this->mas[i] = other.mas[i];
         }
     }
 
+    Arr(Arr&& other) noexcept: mas(nullptr), size(0)
+    {
+        this->mas = other.mas;
+        this->size = other.size;
+        other.mas = nullptr;
+        other.size = 0;
+    }
+
     ~Arr()
     {
-        delete [] this->mas;
+        if(mas != nullptr)
+        {
+            delete [] mas;
+        }
+    }
+
+    Arr& operator=(const Arr& other)
+    {
+        if(this != &other)
+        {
+            if(mas != nullptr)
+            {
+                delete[] mas;
+            }
+            size = other.size;
+            mas = new T[size];
+            for(int i = 0; i < other.size; i++)
+            {
+                this->mas[i] = other.mas[i];
+            }
+        }
+        return *this;
+    }
+
+    Arr& operator=(Arr&& other) noexcept
+    {
+        if (this != &other)
+        {
+            if(mas != nullptr)
+            {
+                delete[] mas;
+            }
+            mas = other.mas;
+            size = other.size;
+            other.mas = nullptr;
+            other.size = 0;
+        }
+        return *this;
     }
 
     T& operator[](int index)
