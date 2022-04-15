@@ -32,10 +32,8 @@ public:
         }
     }
 
-    Arr(Arr&& other) noexcept: mas(nullptr), size(0)
+    Arr(Arr&& other) noexcept: mas(other.mas), size(other.size)
     {
-        this->mas = other.mas;
-        this->size = other.size;
         other.mas = nullptr;
         other.size = 0;
     }
@@ -103,7 +101,7 @@ public:
         return mas[index];
     }
 
-    int getSize() const
+    [[nodiscard]] int getSize() const
     {
         return size;
     }
