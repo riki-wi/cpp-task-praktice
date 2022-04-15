@@ -79,9 +79,9 @@ public:
 
     void pop_bask();
 
-    Iterator end();
+    Iterator end() const;
 
-    Iterator begin();
+    Iterator begin() const;
 
     Iterator find(const T &value) const;
 };
@@ -169,6 +169,7 @@ void List<T>::push_back(const T &value)
     if(!front_)
     {
         push_front(value);
+        size_++;
         return;
     }
 
@@ -187,6 +188,19 @@ void List<T>::push_back(const T &value)
 template<typename T>
 void List<T>::push_after(const T &value, const List::Iterator &iter)
 {
+    if(!front_)
+    {
+        push_front(value);
+        return;
+    }
+
+    Iterator iter_null = Iterator(nullptr);
+    if(iter_null == iter)
+    {
+        push_back(value);
+        return;
+    }
+
     Node *node = new Node(value);
     if(node)
     {
@@ -198,10 +212,10 @@ void List<T>::push_after(const T &value, const List::Iterator &iter)
             {
                 node->next = temp->next;
                 temp->next = node;
-                ++iterator;
                 size_++;
             }
             temp = temp->next;
+            ++iterator;
         }
     }
 }
@@ -221,7 +235,7 @@ T List<T>::front() const
 template<typename T>
 bool List<T>::empty() const
 {
-    return (front_ == nullptr);
+    return (size_ == 0);
 }
 
 template<typename T>
@@ -295,13 +309,13 @@ void List<T>::pop_bask()
 }
 
 template<typename T>
-typename List<T>::Iterator List<T>::end()
+typename List<T>::Iterator List<T>::end() const
 {
     return Iterator(nullptr);
 }
 
 template<typename T>
-typename List<T>::Iterator List<T>::begin()
+typename List<T>::Iterator List<T>::begin() const
 {
     return Iterator(front_);
 }
