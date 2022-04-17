@@ -52,9 +52,9 @@ public:
 
         T &operator*() const;
 
-        bool operator==(const Iterator &other);
+        bool operator==(const Iterator &other) const;
 
-        bool operator!=(const Iterator &other);
+        bool operator!=(const Iterator &other) const;
 
         void operator++();
     };
@@ -324,10 +324,11 @@ template<typename T>
 typename List<T>::Iterator List<T>::find(const T &value) const
 {
     Node *node = front_;
-    while(front_)
+    while(node)
     {
         if(node->data == value)
             return Iterator(node);
+        node = node->next;
     }
     return Iterator(nullptr);
 }
@@ -350,7 +351,7 @@ T &List<T>::Iterator::operator*() const
 }
 
 template<typename T>
-bool List<T>::Iterator::operator==(const Iterator &other)
+bool List<T>::Iterator::operator==(const Iterator &other) const
 {
     if(this == &other)
     {
@@ -360,7 +361,7 @@ bool List<T>::Iterator::operator==(const Iterator &other)
 }
 
 template<typename T>
-bool List<T>::Iterator::operator!=(const Iterator &other)
+bool List<T>::Iterator::operator!=(const Iterator &other) const
 {
     return !(this->operator==(other));
 }

@@ -42,6 +42,19 @@ template<typename T>
     return ::testing::AssertionSuccess();
 }
 
+template<typename T>
+::testing::AssertionResult eq_iterator(const typename List<T>::Iterator &a, const typename List<T>::Iterator &b)
+{
+    if(a == b)
+    {
+        return ::testing::AssertionSuccess();
+    }
+    else
+    {
+        return ::testing::AssertionFailure() << *a << ", " << *b;
+    }
+}
+
 TEST_F(TestList, test_intersect_one)
 {
     for(int i = 9; i >= 0; i -= 2)
@@ -157,6 +170,26 @@ TEST_F(TestList, test_reverse_two)
     ASSERT_TRUE(eq_list(a, mas, 1));
 
     delete[] mas;
+}
+
+TEST_F(TestList, test_find_one)
+{
+    auto iter = List<int>::Iterator(nullptr);
+    ASSERT_TRUE(eq_iterator<int>(iter, a.find(-1)));
+
+    for(int i = 0; i < 10; i++)
+    {
+        a.push_front(i);
+    }
+
+    ASSERT_TRUE(eq_iterator<int>(iter, a.find(-100)));
+
+    int i = 9;
+    for(iter = a.begin(); iter != a.end(); ++iter)
+    {
+        ASSERT_TRUE(eq_iterator<int>(iter, a.find(i)));
+        i--;
+    }
 }
 
 
