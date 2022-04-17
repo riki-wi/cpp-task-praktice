@@ -201,6 +201,54 @@ TEST_F(TestList, test_pop)
     a.pop_back();
     mas = new int[3]{3, 2, 1};
     ASSERT_TRUE(eq_list(a, mas, 3));
+
+    delete [] mas;
 }
 
+TEST_F(TestList, test_sort_one)
+{
+    a.push_front(1);
+    a.push_front(-2);
+    a.push_front(-3);
+    a.push_front(-4);
+    a.sort(min);
+    mas = new int[4]{-4, -3, -2, 1};
 
+    ASSERT_TRUE(eq_list(a, mas, 4));
+
+    delete [] mas;
+}
+
+TEST_F(TestList, test_sort_two)
+{
+    a.push_front(1);
+    a.sort(min);
+    mas = new int[4]{1};
+
+    ASSERT_TRUE(eq_list(a, mas, 1));
+
+    delete [] mas;
+}
+
+TEST_F(TestList, test_sort_three)
+{
+    a.sort(min);
+    mas = new int[0]{};
+
+    ASSERT_TRUE(eq_list(a, mas, 0));
+
+    delete [] mas;
+}
+
+TEST_F(TestList, test_sort_four)
+{
+    a.push_front(1);
+    a.push_front(2);
+    a.push_front(3);
+    a.sort(min);
+    mas = new int[3]{1, 2, 3};
+
+    ASSERT_TRUE(eq_list(a, mas, 3));
+
+    delete [] mas;
+}

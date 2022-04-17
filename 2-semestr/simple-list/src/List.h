@@ -29,11 +29,15 @@ private:
     long long size_;
 
 public:
+    class Iterator;
+
     List();
 
     List(const List &other);
 
     List(List &&other) noexcept;
+
+    List(const List<T>::Iterator& iter_first, const List<T>::Iterator& iter_last);
 
     List(T value, long long size);
 
@@ -42,22 +46,6 @@ public:
     List &operator=(const List &other);
 
     List &operator=(List &&other) noexcept;
-
-    class Iterator
-    {
-    private:
-        Node *node_;
-    public:
-        explicit Iterator(Node *node);
-
-        T &operator*() const;
-
-        bool operator==(const Iterator &other) const;
-
-        bool operator!=(const Iterator &other) const;
-
-        void operator++();
-    };
 
     void push_front(const T &value);
 
@@ -79,12 +67,58 @@ public:
 
     void pop_back();
 
+    void sort(bool (*cmp)(const T &, const T &));
+
     Iterator end() const;
 
     Iterator begin() const;
 
     Iterator find(const T &value) const;
 };
+
+template<typename T>
+List<T> intersect_list_sorted(bool (*cmp)(const T &, const T &),
+                              const typename List<T>::Iterator list_one_begin,
+                              const typename List<T>::Iterator list_two_begin,
+                              const typename List<T>::Iterator list_one_end,
+                              const typename List<T>::Iterator list_two_end)
+{
+    List<T> result;
+    typename List<T>::Iterator list_one = list_one_begin;
+    typename List<T>::Iterator list_two = list_two_begin;
+
+
+    while(list_two != list_two_end && list_one != list_one_end)
+    {
+        if(cmp(*list_one, *list_two))
+        {
+            result.push_front(*list_one);
+            ++list_one;
+        } else
+        {
+            result.push_front(*list_two);
+            ++list_two;
+        }
+    }
+
+    if(list_one == list_one_end)
+    {
+        while(list_two != list_two_end)
+        {
+            result.push_front(*list_two);
+            ++list_two;
+        }
+    } else
+    {
+        while(list_one != list_one_end)
+        {
+            result.push_front(*list_one);
+            ++list_one;
+        }
+    }
+    result.reverse();
+    return result;
+}
 
 template<typename T>
 List<T>::List(): size_(0), front_(nullptr)
@@ -105,7 +139,26 @@ List<T>::List(const List &other): size_(other.size_), front_(nullptr)
 template<typename T>
 List<T>::List(List &&other) noexcept: front_(other.front_), size_(other.size_)
 {
-    other.clear();
+    other.front_ = nullptr;
+    other.size_ = 0;
+}
+
+template<typename T>
+List<T>::List(const List<T>::Iterator& iter_first, const List<T>::Iterator& iter_last): size_(0), front_(nullptr)
+{
+    List<T>::Iterator iter_mutable_first = iter_first;
+    List<T>::Iterator iter_mutable_last = iter_last;
+    while(iter_mutable_first != iter_mutable_last)
+    {
+        // this->end ~ Iterator(nullptr)
+        if(iter_mutable_first == this->end())
+        {
+            return;
+        }
+        this->push_front(*iter_mutable_first);
+        ++iter_mutable_first;
+        this->reverse();
+    }
 }
 
 template<typename T>
@@ -143,9 +196,11 @@ List<T> &List<T>::operator=(List &&other) noexcept
 {
     if(this != &other)
     {
+        this->clear();
         front_ = other.front_;
         size_ = other.size_;
-        other.clear();
+        other.front_ = nullptr;
+        other.size_ = 0;
     }
     return *this;
 }
@@ -309,6 +364,27 @@ void List<T>::pop_back()
     }
 }
 
+template <typename T>
+void List<T>::sort(bool (*cmp)(const T &, const T &))
+{
+    if(this->size_ <= 1)
+        return;
+
+    Iterator iter = this->begin();
+    for(int i = 0; i < this->size_/2; i++)
+    {
+        ++iter;
+    }
+
+    List<T> list_first(this->begin(), iter);
+    List<T> list_last(iter, this->end());
+
+    list_first.sort(cmp);
+    list_last.sort(cmp);
+
+    *this = intersect_list_sorted<int>(cmp, list_first.begin(), list_last.begin(), list_first.end(), list_last.end());
+}
+
 template<typename T>
 typename List<T>::Iterator List<T>::end() const
 {
@@ -333,6 +409,25 @@ typename List<T>::Iterator List<T>::find(const T &value) const
     }
     return Iterator(nullptr);
 }
+
+template<typename T>
+class List<T>::Iterator
+{
+private:
+    Node *node_;
+public:
+    explicit Iterator(Node *node);
+
+    T &operator*() const;
+
+    bool operator==(const Iterator &other) const;
+
+    bool operator!=(const Iterator &other) const;
+
+    void operator++();
+
+    friend List;
+};
 
 template<typename T>
 List<T>::Iterator::Iterator(Node *node): node_(node)
@@ -377,48 +472,4 @@ void List<T>::Iterator::operator++()
     {
         throw NullPointerException();
     }
-}
-
-template<typename T>
-List<T> intersect_list_sorted(bool (*cmp)(const T &, const T &),
-                              const typename List<T>::Iterator list_one_begin,
-                              const typename List<T>::Iterator list_two_begin,
-                              const typename List<T>::Iterator list_one_end,
-                              const typename List<T>::Iterator list_two_end)
-{
-    List<T> result;
-    typename List<T>::Iterator list_one = list_one_begin;
-    typename List<T>::Iterator list_two = list_two_begin;
-
-
-    while(list_two != list_two_end && list_one != list_one_end)
-    {
-        if(cmp(*list_one, *list_two))
-        {
-            result.push_front(*list_one);
-            ++list_one;
-        } else
-        {
-            result.push_front(*list_two);
-            ++list_two;
-        }
-    }
-
-    if(list_one == list_one_end)
-    {
-        while(list_two != list_two_end)
-        {
-            result.push_front(*list_two);
-            ++list_two;
-        }
-    } else
-    {
-        while(list_one != list_one_end)
-        {
-            result.push_front(*list_one);
-            ++list_one;
-        }
-    }
-    result.reverse();
-    return result;
 }
