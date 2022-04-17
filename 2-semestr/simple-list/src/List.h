@@ -19,7 +19,7 @@ private:
     public:
         Node() = default;
 
-        explicit Node(T data) : data(data), next(nullptr)
+        explicit Node(const T& data) : data(data), next(nullptr)
         {
         };
         friend List;
