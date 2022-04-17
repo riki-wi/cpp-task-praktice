@@ -77,7 +77,7 @@ public:
 
     void pop_front();
 
-    void pop_bask();
+    void pop_back();
 
     Iterator end() const;
 
@@ -292,7 +292,7 @@ void List<T>::pop_front()
 }
 
 template<typename T>
-void List<T>::pop_bask()
+void List<T>::pop_back()
 {
     Node *node = front_;
     Node *prev = nullptr;
@@ -305,6 +305,7 @@ void List<T>::pop_bask()
         }
         delete prev->next;
         prev->next = nullptr;
+        size_--;
     }
 }
 

@@ -148,11 +148,10 @@ TEST_F(TestList, test_push_three)
 
 TEST_F(TestList, test_reverse_one)
 {
-    a.push_front(1);
-    a.push_front(2);
-    a.push_front(3);
-    a.push_front(4);
-    a.push_front(5);
+    for(int i = 1; i < 6; i++)
+    {
+        a.push_front(i);
+    }
 
     a.reverse();
     mas = new int[5]{1, 2, 3, 4, 5};
@@ -190,6 +189,18 @@ TEST_F(TestList, test_find_one)
         ASSERT_TRUE(eq_iterator<int>(iter, a.find(i)));
         i--;
     }
+}
+
+TEST_F(TestList, test_pop)
+{
+    for(int i = 0; i < 5; i++)
+    {
+        a.push_front(i);
+    }
+    a.pop_front();
+    a.pop_back();
+    mas = new int[3]{3, 2, 1};
+    ASSERT_TRUE(eq_list(a, mas, 3));
 }
 
 
