@@ -136,21 +136,19 @@ typename AvlTree<T>::Node *AvlTree<T>::single_turn_right(AvlTree::Node *node)
     return node_left;
 }
 
-template<typename T>
+/*template<typename T>
 typename AvlTree<T>::Node *AvlTree<T>::double_turn_left(AvlTree::Node *node)
 {
-    if(node->left == nullptr)
-        throw NullPointerException();
-    node->left = single_turn_right(node->left);
+    node->left = single_turn_right(node->right);
     return single_turn_right(node);
 }
 
 template<typename T>
 typename AvlTree<T>::Node *AvlTree<T>::double_turn_right(AvlTree::Node *node)
 {
-    node->right = single_turn_left(node->right);
+    node->right = single_turn_left(node->left);
     return single_turn_left(node);
-}
+}*/
 
 template<typename T>
 void AvlTree<T>::insert(const T &value)
@@ -172,20 +170,16 @@ typename AvlTree<T>::Node* AvlTree<T>::balance(AvlTree::Node *node)
     {
         if(balance_factor(node->right) < 0)
         {
-            return double_turn_right(node);
-        } else
-        {
-            return single_turn_left(node);
+            single_turn_right(node->right);
         }
+        single_turn_left(node);
     } else if(balance_factor(node) == -2)
     {
-        if(balance_factor(node->left) < 0)
+        if(balance_factor(node->left) > 0)
         {
-            return double_turn_left(node);
-        } else
-        {
-            return single_turn_right(node);
+            single_turn_left(node->left);
         }
+        single_turn_right(node);
     } else
     {
         return node;
@@ -214,10 +208,10 @@ typename AvlTree<T>::Node *AvlTree<T>::insert_avl_recurse(AvlTree::Node *node, c
         node->right = insert_avl_recurse(node->right, value);
     } else
     {
-        return new Node(value);
+        //return new Node(value);
     }
     //return node;
-    return balance(node);
+    node = balance(node);
 }
 
 template<typename T>
