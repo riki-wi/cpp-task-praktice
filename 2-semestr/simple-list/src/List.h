@@ -126,7 +126,7 @@ List<T>::List(): size_(0), front_(nullptr)
 };
 
 template<typename T>
-List<T>::List(const List &other): size_(other.size_), front_(nullptr)
+List<T>::List(const List &other): size_(0), front_(nullptr)
 {
     Iterator iterator = other.begin();
     for(iterator; iterator != other.end(); ++iterator)
