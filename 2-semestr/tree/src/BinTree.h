@@ -35,7 +35,7 @@ public:
 
     BinTree(BinTree &&other) noexcept;
 
-    ~BinTree();
+    virtual ~BinTree();
 
     BinTree &operator=(const BinTree &other);
 
@@ -51,7 +51,7 @@ public:
         Node *travel_left(Node *node);
 
     public:
-        explicit Iterator(Node *node);
+       Iterator(Node *node);
 
         T &operator*() const;
 
@@ -64,13 +64,13 @@ public:
         friend BinTree;
     };
 
-    void add(const T &value);
+    virtual void add(const T &value);
 
     long long get_size() const;
 
-    T get_root() const;
+    virtual T get_root() const;
 
-    void remove(const T &value);
+    virtual void remove(const T &value);
 
     Iterator begin() const;
 
