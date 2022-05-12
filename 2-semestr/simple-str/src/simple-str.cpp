@@ -1,6 +1,6 @@
 #include "simple-str.h"
 
-int lengthString(const char *str)
+int length_string(const char *str)
 {
     if(str == nullptr || str[0] == '\0')
         return 0;
@@ -12,10 +12,10 @@ int lengthString(const char *str)
     return count;
 }
 
-int countSymbol(const char *str, char symbol)
+int count_symbol(const char *str, char symbol)
 {
     int count = 0;
-    int length = lengthString(str);
+    int length = length_string(str);
     for(int i = 0; i < length; i++)
     {
         if(str[i] == symbol)
@@ -24,12 +24,12 @@ int countSymbol(const char *str, char symbol)
     return count;
 }
 
-long long myAtoi(const char *str)
+long long my_atoi(const char *str)
 {
     long long result = 0;
     long long rank = 1;
 
-    int length = lengthString(str);
+    int length = length_string(str);
     for(int i = length - 1; i >= 1; i--)
     {
         if(str[i] < 48)
@@ -57,52 +57,52 @@ long long myAtoi(const char *str)
     return result;
 }
 
-char *concat(const char *strOne, const char *strTwo)
+char *concat(const char *str_one, const char *str_two)
 {
-    char *result = new char[lengthString(strOne) + lengthString(strTwo) + 1];
+    char *result = new char[length_string(str_one) + length_string(str_two) + 1];
 
-    int lengthStrOne = lengthString(strOne);
-    int lengthStrTwo = lengthString(strTwo);
-    for(int i = 0; i < lengthStrOne; i++)
+    int length_str_one = length_string(str_one);
+    int length_str_two = length_string(str_two);
+    for(int i = 0; i < length_str_one; i++)
     {
-        result[i] = strOne[i];
+        result[i] = str_one[i];
     }
-    for(int i = 0; i < lengthStrTwo; i++)
+    for(int i = 0; i < length_str_two; i++)
     {
-        result[lengthStrOne + i] = strTwo[i];
+        result[length_str_one + i] = str_two[i];
     }
-    result[lengthStrOne + lengthStrTwo] = '\0';
+    result[length_str_one + length_str_two] = '\0';
     return result;
 }
 
-bool stringEQ(const char *strOne, const char *strTwo)
+bool string_eq(const char *str_one, const char *str_two)
 {
-    if((strOne == nullptr && strTwo != nullptr) || (strOne != nullptr && strTwo == nullptr))
+    if((str_one == nullptr && str_two != nullptr) || (str_one != nullptr && str_two == nullptr))
         return false;
 
-    if(lengthString(strOne) != lengthString(strTwo))
+    if(length_string(str_one) != length_string(str_two))
         return false;
 
-    for(int i = 0; i < lengthString(strOne); i++)
+    for(int i = 0; i < length_string(str_one); i++)
     {
-        if(strOne[i] != strTwo[i])
+        if(str_one[i] != str_two[i])
             return false;
     }
     return true;
 }
 
-bool stringEmpty(const char *str)
+bool string_empty(const char *str)
 {
     if(str == nullptr)
         return true;
-    return stringEQ(str, "");
+    return string_eq(str, "");
 }
 
-int splitString(const char *str, char symbol, char ***mas)
+int split_string(const char *str, char symbol, char ***mas)
 {
-    int wordLen = 1;
-    int count = countSymbol(str, symbol) + 1;
-    int len = lengthString(str);
+    int word_len = 1;
+    int count = count_symbol(str, symbol) + 1;
+    int len = length_string(str);
     int j = 0;
 
     *mas = new char *[count];
@@ -112,13 +112,13 @@ int splitString(const char *str, char symbol, char ***mas)
             break;
         if(str[i] == symbol)
         {
-            (*mas)[j] = new char[wordLen];
-            wordLen = 0;
+            (*mas)[j] = new char[word_len];
+            word_len = 0;
             j++;
         }
-        wordLen++;
+        word_len++;
     }
-    (*mas)[j] = new char[wordLen];
+    (*mas)[j] = new char[word_len];
 
     j = 0;
     char *temp = (*mas)[j];
@@ -135,30 +135,4 @@ int splitString(const char *str, char symbol, char ***mas)
         }
     }
     return count;
-}
-
-int myStrcmp(const char *strOne, const char *strTwo)
-{
-    if(stringEmpty(strOne) && stringEmpty(strTwo))
-    {
-        return 0;
-    }
-
-    if((stringEmpty(strOne) && !stringEmpty(strTwo)) || (!stringEmpty(strOne) && stringEmpty(strTwo)))
-    {
-        return 1;
-    }
-
-    int i = 1;
-    while(strOne == strTwo && strOne[i - 1] != '\0' && strTwo[i - 1] != '\0')
-    {
-        strOne++;
-        strTwo++;
-        if(strOne != strTwo)
-        {
-            return i;
-        }
-        i++;
-    }
-    return 0;
 }

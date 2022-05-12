@@ -3,62 +3,62 @@
 
 TEST(lengthTest, TestOne)
 {
-    ASSERT_EQ(lengthString(""), 0);
+    ASSERT_EQ(length_string(""), 0);
 }
 
 TEST(lengthTest, TestTwo)
 {
-    ASSERT_EQ(lengthString("hello"), 5);
+    ASSERT_EQ(length_string("hello"), 5);
 }
 
 TEST(lengthTest, TestThree)
 {
-    ASSERT_EQ(lengthString("hello word!"), 11);
+    ASSERT_EQ(length_string("hello word!"), 11);
 }
 
 TEST(countTest, TestOne)
 {
-    ASSERT_EQ(countSymbol("", ' '), 0);
+    ASSERT_EQ(count_symbol("", ' '), 0);
 }
 
 TEST(countTest, TestTwo)
 {
-    ASSERT_EQ(countSymbol("hello", 'l'), 2);
+    ASSERT_EQ(count_symbol("hello", 'l'), 2);
 }
 
 TEST(countTest, TestThree)
 {
-    ASSERT_EQ(countSymbol("hello word!", 'p'), 0);
+    ASSERT_EQ(count_symbol("hello word!", 'p'), 0);
 }
 
 TEST(myAtoi, TestOne)
 {
-    ASSERT_EQ(myAtoi("0"), 0);
+    ASSERT_EQ(my_atoi("0"), 0);
 }
 
 TEST(myAtoi, TestTwo)
 {
-    ASSERT_EQ(myAtoi("12034"), 12034);
+    ASSERT_EQ(my_atoi("12034"), 12034);
 }
 
 TEST(myAtoi, TestThree)
 {
-    ASSERT_EQ(myAtoi("-12034"), -12034);
+    ASSERT_EQ(my_atoi("-12034"), -12034);
 }
 
 TEST(myAtoi, TestFour)
 {
-    ASSERT_EQ(myAtoi("-10034"), -10034);
+    ASSERT_EQ(my_atoi("-10034"), -10034);
 }
 
 TEST(myAtoi, TestFive)
 {
-    ASSERT_EQ(myAtoi("-10030"), -10030);
+    ASSERT_EQ(my_atoi("-10030"), -10030);
 }
 
 TEST(myAtoi, TestSix)
 {
-    ASSERT_EQ(myAtoi("-10000"), -10000);
+    ASSERT_EQ(my_atoi("-10000"), -10000);
 }
 
 TEST(concat, TestOne)
@@ -78,45 +78,25 @@ TEST(concat, TestThree)
 
 TEST(stringEQ, TestOne)
 {
-    ASSERT_TRUE(stringEQ("", ""));
+    ASSERT_TRUE(string_eq("", ""));
 }
 
 TEST(stringEQ, TestTwo)
 {
-    ASSERT_TRUE(stringEQ("hello word", "hello word"));
+    ASSERT_TRUE(string_eq("hello word", "hello word"));
 }
 
 TEST(stringEQ, TestThree)
 {
-    ASSERT_FALSE(stringEQ("hello", "hello word"));
+    ASSERT_FALSE(string_eq("hello", "hello word"));
 }
 
 TEST(stringEmpty, TestOne)
 {
-    ASSERT_TRUE(stringEmpty(""));
+    ASSERT_TRUE(string_empty(""));
 }
 
 TEST(stringEmpty, TestTwo)
 {
-    ASSERT_FALSE(stringEmpty("h"));
-}
-
-TEST(strCmp, TestOne)
-{
-    ASSERT_EQ(0, myStrcmp("", ""));
-}
-
-TEST(strCmp, TestTwo)
-{
-    ASSERT_EQ(1, myStrcmp("", "a"));
-}
-
-TEST(strCmp, TestThree)
-{
-    ASSERT_EQ(0, myStrcmp("f", "f"));
-}
-
-TEST(strCmp, TestFour)
-{
-    ASSERT_EQ(0, myStrcmp("hello", "hello"));
+    ASSERT_FALSE(string_empty("h"));
 }

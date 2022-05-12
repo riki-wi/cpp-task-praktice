@@ -9,9 +9,9 @@ public:
         msg = "Argument exception";
     }
 
-    explicit ArgumentException(char *errorMsg)
+    explicit ArgumentException(char *error_msg)
     {
-        msg = errorMsg;
+        msg = error_msg;
     }
 
     char *what()
@@ -20,18 +20,16 @@ public:
     }
 };
 
-int lengthString(const char *str);
+int length_string(const char *str);
 
-int countSymbol(const char *str, char symbol);
+int count_symbol(const char *str, char symbol);
 
-long long myAtoi(const char *str);
+long long my_atoi(const char *str);
 
-char *concat(const char *strOne, const char *strTwo);
+char *concat(const char *str_one, const char *str_two);
 
-bool stringEQ(const char *strOne, const char *strTwo);
+bool string_eq(const char *str_one, const char *str_two);
 
-bool stringEmpty(const char *str);
+bool string_empty(const char *str);
 
-int splitString(const char *str, char symbol, char ***mas);
-
-int myStrcmp(const char *strOne, const char *strTwo);
+int split_string(const char *str, char symbol, char ***mas);
