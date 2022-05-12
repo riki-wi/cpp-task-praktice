@@ -1,20 +1,20 @@
 class ArgumentException
 {
 private:
-    char *msg;
+    const char *msg;
 
 public:
     ArgumentException()
     {
-        msg = "Argument exception";
+        msg = (const char *)"Argument exception";
     }
 
-    explicit ArgumentException(char *error_msg)
+    explicit ArgumentException(const char *error_msg)
     {
         msg = error_msg;
     }
 
-    char *what()
+    const char *what()
     {
         return msg;
     }

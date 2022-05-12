@@ -3,7 +3,7 @@ class NullPointerException
 public:
     const char *what()
     {
-        return "Null pointer dereference";
+        return (const char *)"Null pointer dereference";
     }
 };
 
