@@ -10,13 +10,14 @@ class Arr
 private:
     T* mas;
     int size;
+    int numberElements;
 
 public:
-    Arr(): size(0), mas(new T[0]){}
+    Arr(): size(0), numberElements(0), mas(new T[0]){}
 
-    explicit Arr(int size): size(size), mas(new T[size]){}
+    explicit Arr(int size): size(size), numberElements(0), mas(new T[size]){}
 
-    Arr(int size, const T& init): size(size), mas(new T[size])
+    Arr(int size, const T& init): size(size), numberElements(size), mas(new T[size])
     {
         for(int i = 0; i < size; i++)
         {
@@ -24,7 +25,7 @@ public:
         }
     }
 
-    Arr(const Arr& other): size(other.size), mas(new T[other.size])
+    Arr(const Arr& other): size(other.size), numberElements(other.numberElements), mas(new T[other.size])
     {
         for(int i = 0; i < other.size; i++)
         {
@@ -32,7 +33,7 @@ public:
         }
     }
 
-    Arr(Arr&& other) noexcept: mas(other.mas), size(other.size)
+    Arr(Arr&& other) noexcept: mas(other.mas), numberElements(other.numberElements), size(other.size)
     {
         other.mas = nullptr;
         other.size = 0;
@@ -55,6 +56,7 @@ public:
                 delete[] mas;
             }
             size = other.size;
+            numberElements = other.numberElements;
             mas = new T[size];
             for(int i = 0; i < other.size; i++)
             {
@@ -73,6 +75,7 @@ public:
                 delete[] mas;
             }
             mas = other.mas;
+            numberElements = other.numberElements;
             size = other.size;
             other.mas = nullptr;
             other.size = 0;
@@ -129,8 +132,16 @@ public:
 
     void addElem(const T& elem)
     {
-        resize(size + 1);
-        mas[size - 1] = elem;
+        if(size == numberElements)
+        {
+            resize(size + 1);
+            mas[size - 1] = elem;
+            numberElements++;
+        } else if(size > numberElements)
+        {
+            mas[numberElements - 1] = elem;
+            numberElements++;
+        }
     }
 
     void removeElem(int index)
