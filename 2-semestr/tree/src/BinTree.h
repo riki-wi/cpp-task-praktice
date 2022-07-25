@@ -2,7 +2,7 @@
 
 #include "Stack.h"
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
+template<typename T>
 class BinTree
 {
 protected:
@@ -79,16 +79,16 @@ public:
     Iterator find(const T &value) const;
 };
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-BinTree<T, cmp>::Node::Node() = default;
+template<typename T>
+BinTree<T>::Node::Node() = default;
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-BinTree<T, cmp>::Node::Node(T value): value_(value), right_(nullptr), left_(nullptr)
+template<typename T>
+BinTree<T>::Node::Node(T value): value_(value), right_(nullptr), left_(nullptr)
 {
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-void BinTree<T, cmp>::clear(Node *node)
+template<typename T>
+void BinTree<T>::clear(Node *node)
 {
     if(node != nullptr)
     {
@@ -104,23 +104,23 @@ void BinTree<T, cmp>::clear(Node *node)
     }
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-BinTree<T, cmp>::BinTree(): root_(nullptr), size_(0)
+template<typename T>
+BinTree<T>::BinTree(): root_(nullptr), size_(0)
 {
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-BinTree<T, cmp>::BinTree(T value): root_(Node(value)), size_(1)
+template<typename T>
+BinTree<T>::BinTree(T value): root_(Node(value)), size_(1)
 {
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-BinTree<T, cmp>::BinTree(BinTree::Node *node): root_(node), size_(1)
+template<typename T>
+BinTree<T>::BinTree(BinTree::Node *node): root_(node), size_(1)
 {
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-BinTree<T, cmp>::BinTree(const BinTree &other): root_(nullptr), size_(0)
+template<typename T>
+BinTree<T>::BinTree(const BinTree &other): root_(nullptr), size_(0)
 {
     Iterator iterator = other.begin();
     for(iterator; iterator != other.end(); ++iterator)
@@ -129,21 +129,21 @@ BinTree<T, cmp>::BinTree(const BinTree &other): root_(nullptr), size_(0)
     }
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-BinTree<T, cmp>::BinTree(BinTree &&other) noexcept: root_(other.root_), size_(other.size_)
+template<typename T>
+BinTree<T>::BinTree(BinTree &&other) noexcept: root_(other.root_), size_(other.size_)
 {
     other.root_ = nullptr;
     other.size_ = 0;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-BinTree<T, cmp>::~BinTree()
+template<typename T>
+BinTree<T>::~BinTree()
 {
     clear(root_);
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-BinTree<T, cmp> &BinTree<T, cmp>::operator=(const BinTree &other)
+template<typename T>
+BinTree<T> &BinTree<T>::operator=(const BinTree &other)
 {
     if(this != &other)
     {
@@ -156,8 +156,8 @@ BinTree<T, cmp> &BinTree<T, cmp>::operator=(const BinTree &other)
     return *this;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-BinTree<T, cmp> &BinTree<T, cmp>::operator=(BinTree &&other) noexcept
+template<typename T>
+BinTree<T> &BinTree<T>::operator=(BinTree &&other) noexcept
 {
     if(this != &other)
     {
@@ -170,14 +170,14 @@ BinTree<T, cmp> &BinTree<T, cmp>::operator=(BinTree &&other) noexcept
     return *this;
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-BinTree<T, cmp>::Iterator::Iterator(BinTree::Node *node): node_(node)
+template<typename T>
+BinTree<T>::Iterator::Iterator(BinTree::Node *node): node_(node)
 {
     node_ = travel_left(node);
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-T &BinTree<T, cmp>::Iterator::operator*() const
+template<typename T>
+T &BinTree<T>::Iterator::operator*() const
 {
     if(node_)
     {
@@ -188,8 +188,8 @@ T &BinTree<T, cmp>::Iterator::operator*() const
     }
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-bool BinTree<T, cmp>::Iterator::operator==(const BinTree::Iterator &other) const
+template<typename T>
+bool BinTree<T>::Iterator::operator==(const BinTree::Iterator &other) const
 {
     if(this == &other)
     {
@@ -198,14 +198,14 @@ bool BinTree<T, cmp>::Iterator::operator==(const BinTree::Iterator &other) const
     return node_ == other.node_;
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-bool BinTree<T, cmp>::Iterator::operator!=(const BinTree::Iterator &other) const
+template<typename T>
+bool BinTree<T>::Iterator::operator!=(const BinTree::Iterator &other) const
 {
     return !(this->operator==(other));
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-void BinTree<T, cmp>::Iterator::operator++()
+template<typename T>
+void BinTree<T>::Iterator::operator++()
 {
     if(node_->right_ != nullptr)
     {
@@ -220,8 +220,8 @@ void BinTree<T, cmp>::Iterator::operator++()
     }
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-typename BinTree<T, cmp>::Node *BinTree<T, cmp>::Iterator::travel_left(BinTree::Node *node)
+template<typename T>
+typename BinTree<T>::Node *BinTree<T>::Iterator::travel_left(BinTree::Node *node)
 {
     if(node == nullptr)
     {
@@ -235,8 +235,8 @@ typename BinTree<T, cmp>::Node *BinTree<T, cmp>::Iterator::travel_left(BinTree::
     return node;
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-void BinTree<T, cmp>::add(const T &value)
+template<typename T>
+void BinTree<T>::add(const T &value)
 {
     if(root_ == nullptr)
     {
@@ -249,11 +249,11 @@ void BinTree<T, cmp>::add(const T &value)
 
     while(current)
     {
-        if(cmp(current->value_, value))
+        if(current->value_ < value)
         {
             parent = current;
             current = current->right_;
-        } else if(cmp(value, current->value_))
+        } else if(value < current->value_)
         {
             parent = current;
             current = current->left_;
@@ -263,7 +263,7 @@ void BinTree<T, cmp>::add(const T &value)
         }
     }
     current = new Node(value);
-    if(cmp(parent->value_, value))
+    if(parent->value_ < value)
     {
         parent->right_ = current;
     } else
@@ -273,14 +273,14 @@ void BinTree<T, cmp>::add(const T &value)
     size_++;
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-long long BinTree<T, cmp>::get_size() const
+template<typename T>
+long long BinTree<T>::get_size() const
 {
     return size_;
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-T BinTree<T, cmp>::get_root() const
+template<typename T>
+T BinTree<T>::get_root() const
 {
     if(root_ != nullptr)
     {
@@ -291,8 +291,8 @@ T BinTree<T, cmp>::get_root() const
     }
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-void BinTree<T, cmp>::remove(const T &value)
+template<typename T>
+void BinTree<T>::remove(const T &value)
 {
     if(root_)
     {
@@ -300,11 +300,11 @@ void BinTree<T, cmp>::remove(const T &value)
         Node *parent = nullptr;
         while(current)
         {
-            if(cmp(current->value_, value))
+            if(current->value_ < value)
             {
                 parent = current;
                 current = current->right_;
-            } else if(cmp(value, current->value_))
+            } else if (value < current->value_)
             {
                 parent = current;
                 current = current->left_;
@@ -368,30 +368,30 @@ void BinTree<T, cmp>::remove(const T &value)
     }
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-typename BinTree<T, cmp>::Iterator BinTree<T, cmp>::begin() const
+template<typename T>
+typename BinTree<T>::Iterator BinTree<T>::begin() const
 {
     return Iterator(root_);
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-typename BinTree<T, cmp>::Iterator BinTree<T, cmp>::end() const
+template<typename T>
+typename BinTree<T>::Iterator BinTree<T>::end() const
 {
     return Iterator(nullptr);
 }
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-typename BinTree<T, cmp>::Iterator BinTree<T, cmp>::find(const T &value) const
+template<typename T>
+typename BinTree<T>::Iterator BinTree<T>::find(const T &value) const
 {
     if(root_)
     {
         Node *current = root_;
         while(current)
         {
-            if(cmp(value, current->value_))
+            if(value < current->value_)
             {
                 current = current->left_;
-            } else if(cmp(current->value_, value))
+            } else if(current->value_ < value)
             {
                 current = current->right_;
             } else

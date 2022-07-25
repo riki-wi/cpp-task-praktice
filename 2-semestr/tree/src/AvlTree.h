@@ -1,10 +1,10 @@
 #include "BinTree.h"
 
-template<typename T, bool (*cmp)(const T &a, const T &b)>
-class AvlTree : public BinTree<T, cmp>
+template<typename T>
+class AvlTree : public BinTree<T>
 {
 protected:
-    class AvlNode : public BinTree<T, cmp>::Node
+    class AvlNode : public BinTree<T>::Node
     {
     public:
         int height_;
@@ -56,25 +56,25 @@ public:
     void remove(const T &value) override;
 };
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::AvlNode::AvlNode(): BinTree<T, cmp>::Node(), height_(0), left_(nullptr), right_(nullptr)
+template<typename T>
+AvlTree<T>::AvlNode::AvlNode(): BinTree<T>::Node(), height_(0), left_(nullptr), right_(nullptr)
 {
 
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::AvlNode::AvlNode(T value): BinTree<T, cmp>::Node(value), height_(1), left_(nullptr), right_(nullptr)
+template<typename T>
+AvlTree<T>::AvlNode::AvlNode(T value): BinTree<T>::Node(value), height_(1), left_(nullptr), right_(nullptr)
 {
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-int AvlTree<T, cmp>::AvlNode::balance_factor()
+template<typename T>
+int AvlTree<T>::AvlNode::balance_factor()
 {
     return (right_->get_height() - left_->get_height());
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-int AvlTree<T, cmp>::AvlNode::get_height()
+template<typename T>
+int AvlTree<T>::AvlNode::get_height()
 {
     if(this == nullptr)
     {
@@ -85,8 +85,8 @@ int AvlTree<T, cmp>::AvlNode::get_height()
     }
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-void AvlTree<T, cmp>::AvlNode::fix_height()
+template<typename T>
+void AvlTree<T>::AvlNode::fix_height()
 {
     if(right_->get_height() > left_->get_height())
     {
@@ -97,45 +97,45 @@ void AvlTree<T, cmp>::AvlNode::fix_height()
     }
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::AvlTree(): BinTree<T, cmp>(), root_(nullptr)
+template<typename T>
+AvlTree<T>::AvlTree(): BinTree<T>(), root_(nullptr)
 {
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::AvlTree(T value): BinTree<T, cmp>(value), root_(new AvlNode(value))
+template<typename T>
+AvlTree<T>::AvlTree(T value): BinTree<T>(value), root_(new AvlNode(value))
 {
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::AvlTree(const AvlTree &other): root_(nullptr), BinTree<T, cmp>::size_(0)
+template<typename T>
+AvlTree<T>::AvlTree(const AvlTree &other): root_(nullptr), BinTree<T>::size_(0)
 {
-    typename BinTree<T, cmp>::Iterator iterator = other.begin();
+    typename BinTree<T>::Iterator iterator = other.begin();
     for(iterator; iterator != other.end(); ++iterator)
     {
         add(*iterator);
     }
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::AvlTree(AvlTree &&other) noexcept: root_(other.root_), BinTree<T, cmp>::size_(other.size_)
+template<typename T>
+AvlTree<T>::AvlTree(AvlTree &&other) noexcept: root_(other.root_), BinTree<T>::size_(other.size_)
 {
     other.root_ = nullptr;
     other.size_ = 0;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp>::~AvlTree()
+template<typename T>
+AvlTree<T>::~AvlTree()
 {
-    BinTree<T, cmp>::clear(root_);
+    BinTree<T>::clear(root_);
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp> &AvlTree<T, cmp>::operator=(const AvlTree &other)
+template<typename T>
+AvlTree<T> &AvlTree<T>::operator=(const AvlTree &other)
 {
     if(this != &other)
     {
-        typename BinTree<T, cmp>::Iterator iterator = other.begin();
+        typename BinTree<T>::Iterator iterator = other.begin();
         for(iterator; iterator != other.end(); ++iterator)
         {
             add(*iterator);
@@ -144,22 +144,22 @@ AvlTree<T, cmp> &AvlTree<T, cmp>::operator=(const AvlTree &other)
     return *this;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-AvlTree<T, cmp> &AvlTree<T, cmp>::operator=(AvlTree &&other) noexcept
+template<typename T>
+AvlTree<T> &AvlTree<T>::operator=(AvlTree &&other) noexcept
 {
     if(this != &other)
     {
         clear(root_);
         root_ = other.root_;
-        BinTree<T, cmp>::size_ = other.size_;
+        BinTree<T>::size_ = other.size_;
         other.root_ = nullptr;
         other.size_ = 0;
     }
     return *this;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-T AvlTree<T, cmp>::get_root() const
+template<typename T>
+T AvlTree<T>::get_root() const
 {
     if(this->root_)
     {
@@ -171,8 +171,8 @@ T AvlTree<T, cmp>::get_root() const
     }
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::rotate_right(AvlTree::AvlNode *node)
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::rotate_right(AvlTree::AvlNode *node)
 {
     AvlNode *current = node->left_;
     node->left_ = current->right_;
@@ -182,8 +182,8 @@ typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::rotate_right(AvlTree::AvlNod
     return current;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::rotate_left(AvlTree::AvlNode *node)
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::rotate_left(AvlTree::AvlNode *node)
 {
     AvlNode *current = node->right_;
     node->right_ = current->left_;
@@ -193,8 +193,8 @@ typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::rotate_left(AvlTree::AvlNode
     return current;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::balance(AvlTree::AvlNode *node)
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::balance(AvlTree::AvlNode *node)
 {
     node->fix_height();
     if(node->balance_factor() == 2)
@@ -217,8 +217,8 @@ typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::balance(AvlTree::AvlNode *no
     }
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::add_recurse(AvlTree::AvlNode *node, const T &value)
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::add_recurse(AvlTree::AvlNode *node, const T &value)
 {
     if(node == nullptr)
     {
@@ -234,8 +234,8 @@ typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::add_recurse(AvlTree::AvlNode
     return balance(node);
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::remove_recurse(AvlTree::AvlNode *node, const T &value)
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::remove_recurse(AvlTree::AvlNode *node, const T &value)
 {
     if(node == nullptr)
     {
@@ -269,15 +269,15 @@ typename AvlTree<T, cmp>::AvlNode *AvlTree<T, cmp>::remove_recurse(AvlTree::AvlN
     return balance(node);
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-void AvlTree<T, cmp>::add(const T &value)
+template<typename T>
+void AvlTree<T>::add(const T &value)
 {
     root_ = add_recurse(root_, value);
     this->size_++;
 }
 
-template<typename T, bool (*cmp)(const T &, const T &)>
-void AvlTree<T, cmp>::remove(const T &value)
+template<typename T>
+void AvlTree<T>::remove(const T &value)
 {
     root_ = remove_recurse(root_, value);
 }
