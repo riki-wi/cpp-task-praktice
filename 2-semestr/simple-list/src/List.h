@@ -162,7 +162,7 @@ List<T>::List(const List<T>::Iterator& iter_first, const List<T>::Iterator& iter
 }
 
 template<typename T>
-List<T>::List(T value, long long int size): size_(size), front_(nullptr)
+List<T>::List(T value, long long int size): size_(0), front_(nullptr)
 {
     for(int i = 0; i < size; i++)
     {
@@ -331,6 +331,7 @@ void List<T>::clear()
         front_ = front_->next;
         delete temp;
     }
+    delete front_;
     size_ = 0;
 }
 
@@ -418,7 +419,7 @@ private:
 public:
     explicit Iterator(Node *node);
 
-    T &operator*() const;
+    T &operator*();
 
     bool operator==(const Iterator &other) const;
 
@@ -435,7 +436,7 @@ List<T>::Iterator::Iterator(Node *node): node_(node)
 }
 
 template<typename T>
-T &List<T>::Iterator::operator*() const
+T &List<T>::Iterator::operator*()
 {
     if(node_)
     {

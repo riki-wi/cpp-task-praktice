@@ -43,13 +43,12 @@ template<typename T>
 }
 
 template<typename T>
-::testing::AssertionResult eq_iterator(const typename List<T>::Iterator &a, const typename List<T>::Iterator &b)
+::testing::AssertionResult eq_iterator(typename List<T>::Iterator &a, typename List<T>::Iterator &b)
 {
     if(a == b)
     {
         return ::testing::AssertionSuccess();
-    }
-    else
+    } else
     {
         return ::testing::AssertionFailure() << *a << ", " << *b;
     }
@@ -174,19 +173,22 @@ TEST_F(TestList, test_reverse_two)
 TEST_F(TestList, test_find_one)
 {
     auto iter = List<int>::Iterator(nullptr);
-    ASSERT_TRUE(eq_iterator<int>(iter, a.find(-1)));
+    auto iter_find_1 = a.find(-1);
+    ASSERT_TRUE(eq_iterator<int>(iter, iter_find_1));
 
     for(int i = 0; i < 10; i++)
     {
         a.push_front(i);
     }
 
-    ASSERT_TRUE(eq_iterator<int>(iter, a.find(-100)));
+    auto iter_find_2 = a.find(-100);
+    ASSERT_TRUE(eq_iterator<int>(iter, iter_find_2));
 
     int i = 9;
     for(iter = a.begin(); iter != a.end(); ++iter)
     {
-        ASSERT_TRUE(eq_iterator<int>(iter, a.find(i)));
+        auto iter_find = a.find(i);
+        ASSERT_TRUE(eq_iterator<int>(iter, iter_find));
         i--;
     }
 }
@@ -202,7 +204,7 @@ TEST_F(TestList, test_pop)
     mas = new int[3]{3, 2, 1};
     ASSERT_TRUE(eq_list(a, mas, 3));
 
-    delete [] mas;
+    delete[] mas;
 }
 
 TEST_F(TestList, test_sort_one)
@@ -216,7 +218,7 @@ TEST_F(TestList, test_sort_one)
 
     ASSERT_TRUE(eq_list(a, mas, 4));
 
-    delete [] mas;
+    delete[] mas;
 }
 
 TEST_F(TestList, test_sort_two)
@@ -227,7 +229,7 @@ TEST_F(TestList, test_sort_two)
 
     ASSERT_TRUE(eq_list(a, mas, 1));
 
-    delete [] mas;
+    delete[] mas;
 }
 
 TEST_F(TestList, test_sort_three)
@@ -237,7 +239,7 @@ TEST_F(TestList, test_sort_three)
 
     ASSERT_TRUE(eq_list(a, mas, 0));
 
-    delete [] mas;
+    delete[] mas;
 }
 
 TEST_F(TestList, test_sort_four)
@@ -250,5 +252,5 @@ TEST_F(TestList, test_sort_four)
 
     ASSERT_TRUE(eq_list(a, mas, 3));
 
-    delete [] mas;
+    delete[] mas;
 }

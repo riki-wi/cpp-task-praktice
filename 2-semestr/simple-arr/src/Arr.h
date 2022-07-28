@@ -1,23 +1,43 @@
 #ifndef SIMPLE_ARR_ARR_H
 #define SIMPLE_ARR_ARR_H
 
-#include "ArrayException.h"
+class IndexException
+{
+public:
+    const char *what()
+    {
+        return "Bad Index!";
+    }
+};
+
+class SizeException
+{
+public:
+    const char *what()
+    {
+        return "Bad Size!";
+    }
+};
 
 template<typename T>
 class Arr
 {
 
 private:
-    T* mas;
+    T *mas;
     int size;
     int numberElements;
 
 public:
-    Arr(): size(0), numberElements(0), mas(new T[0]){}
+    Arr() : size(0), numberElements(0), mas(new T[0])
+    {
+    }
 
-    explicit Arr(int size): size(size), numberElements(0), mas(new T[size]){}
+    explicit Arr(int size) : size(size), numberElements(0), mas(new T[size])
+    {
+    }
 
-    Arr(int size, const T& init): size(size), numberElements(size), mas(new T[size])
+    Arr(int size, const T &init) : size(size), numberElements(size), mas(new T[size])
     {
         for(int i = 0; i < size; i++)
         {
@@ -25,7 +45,7 @@ public:
         }
     }
 
-    Arr(const Arr& other): size(other.size), numberElements(other.numberElements), mas(new T[other.size])
+    Arr(const Arr &other) : size(other.size), numberElements(other.numberElements), mas(new T[other.size])
     {
         for(int i = 0; i < other.size; i++)
         {
@@ -33,7 +53,7 @@ public:
         }
     }
 
-    Arr(Arr&& other) noexcept: mas(other.mas), numberElements(other.numberElements), size(other.size)
+    Arr(Arr &&other) noexcept: mas(other.mas), numberElements(other.numberElements), size(other.size)
     {
         other.mas = nullptr;
         other.size = 0;
@@ -43,11 +63,11 @@ public:
     {
         if(mas != nullptr)
         {
-            delete [] mas;
+            delete[] mas;
         }
     }
 
-    Arr& operator=(const Arr& other)
+    Arr &operator=(const Arr &other)
     {
         if(this != &other)
         {
@@ -66,9 +86,9 @@ public:
         return *this;
     }
 
-    Arr& operator=(Arr&& other) noexcept
+    Arr &operator=(Arr &&other) noexcept
     {
-        if (this != &other)
+        if(this != &other)
         {
             if(mas != nullptr)
             {
@@ -83,14 +103,14 @@ public:
         return *this;
     }
 
-    T& operator[](int index)
+    T &operator[](int index)
     {
         if(index < 0 || size <= index)
             throw IndexException();
         return mas[index];
     }
 
-    const T& operator[](int index) const
+    const T &operator[](int index) const
     {
         if(index < 0 || size <= index)
             throw IndexException();
@@ -119,18 +139,18 @@ public:
             return;
         }
 
-        int min = size < newSize ?  size : newSize;
-        T* newMas = new T[newSize];
+        int min = size < newSize ? size : newSize;
+        T *newMas = new T[newSize];
         for(int i = 0; i < min; i++)
         {
             newMas[i] = mas[i];
         }
-        delete [] mas;
+        delete[] mas;
         mas = newMas;
         size = newSize;
     }
 
-    void addElem(const T& elem)
+    void addElem(const T &elem)
     {
         if(size == numberElements)
         {
@@ -149,7 +169,7 @@ public:
         if(size < index || index < 0)
             throw IndexException();
 
-        T* newMas = new T[size - 1];
+        T *newMas = new T[size - 1];
 
         int helpIndex = 0;
         for(int i = 0; i < size - 1; i++)
@@ -160,9 +180,10 @@ public:
             }
             newMas[i] = mas[i + helpIndex];
         }
-        delete [] mas;
+        delete[] mas;
         mas = newMas;
         size--;
     }
 };
+
 #endif

@@ -10,11 +10,14 @@ protected:
         masWithSize = Arr<double>(10);
         for(int i = 0; i < masWithSize.getSize(); i++)
         {
-            masWithSize[i] = (double)i;
+            masWithSize[i] = (double) i;
         }
         masWithSizeInit = Arr<std::string>(5, "hello");
     }
-    void TearDown() override{}
+
+    void TearDown() override
+    {
+    }
 
     Arr<int> masEmpty;
     Arr<double> masWithSize;
