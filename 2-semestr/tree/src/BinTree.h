@@ -50,10 +50,14 @@ public:
 
         Node *travel_left(Node *node);
 
-    public:
-       Iterator(Node *node);
+        enum flag{TRAVEL, NO_TRAVEL};
 
-        T &operator*() const;
+        flag flag_travel_;
+
+    public:
+        explicit Iterator(Node *node, flag flag_travel = TRAVEL);
+
+        T &operator*();
 
         bool operator==(const Iterator &other) const;
 
@@ -64,7 +68,7 @@ public:
         friend BinTree;
     };
 
-    virtual void add(const T &value);
+    void add(const T &value);
 
     long long get_size() const;
 
@@ -171,13 +175,16 @@ BinTree<T> &BinTree<T>::operator=(BinTree &&other) noexcept
 }
 
 template<typename T>
-BinTree<T>::Iterator::Iterator(BinTree::Node *node): node_(node)
+BinTree<T>::Iterator::Iterator(BinTree::Node *node, flag flag_travel): node_(node), flag_travel_(flag_travel)
 {
-    node_ = travel_left(node);
+    if(flag_travel_ == 0)
+    {
+        node_ = travel_left(node);
+    }
 }
 
 template<typename T>
-T &BinTree<T>::Iterator::operator*() const
+T &BinTree<T>::Iterator::operator*()
 {
     if(node_)
     {
@@ -304,7 +311,7 @@ void BinTree<T>::remove(const T &value)
             {
                 parent = current;
                 current = current->right_;
-            } else if (value < current->value_)
+            } else if(value < current->value_)
             {
                 parent = current;
                 current = current->left_;
@@ -396,7 +403,7 @@ typename BinTree<T>::Iterator BinTree<T>::find(const T &value) const
                 current = current->right_;
             } else
             {
-                return Iterator(current);
+                return Iterator(current, Iterator::NO_TRAVEL);
             }
         }
     }

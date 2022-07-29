@@ -89,3 +89,26 @@ TEST(find, test_two)
         i++;
     }
 }
+
+TEST(find, test_three)
+{
+    BinTree<int> tree;
+    for(int i = 0; i < 10; i++)
+    {
+        tree.add(i);
+    }
+
+    for(int i = -10; i < 0; i++)
+    {
+        tree.add(i);
+    }
+
+    int i = -10;
+    for(BinTree<int>::Iterator iter = tree.begin(); iter != tree.end(); ++iter)
+    {
+        ASSERT_EQ(i, *iter);
+        ASSERT_EQ(i, *tree.find(i));
+        ASSERT_EQ(iter, tree.find(i));
+        i++;
+    }
+}

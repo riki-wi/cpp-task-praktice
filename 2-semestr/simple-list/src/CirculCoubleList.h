@@ -1,6 +1,15 @@
 #ifndef TASK3_TURING_MACHINE_RIKI_WI_CIRCULDOUBLELIST_H
 #define TASK3_TURING_MACHINE_RIKI_WI_CIRCULDOUBLELIST_H
 
+class Null_Pointer_Exception
+{
+public:
+    const char *what()
+    {
+        return (const char *) "Null pointer dereference";
+    }
+};
+
 template<typename T>
 class Circle_Double_List
 {
@@ -12,7 +21,7 @@ private:
         Node *next;
         Node *prev;
     public:
-        Node() = default;
+        Node();
 
         explicit Node(const T &data) : data(data), next(nullptr), prev(nullptr)
         {
@@ -32,7 +41,7 @@ public:
         Node *node_;
 
     public:
-        explicit Iterator(Node *node);
+        explicit Iterator(const Node *node);
 
         T &operator*();
 
@@ -53,7 +62,7 @@ public:
 
     Circle_Double_List(Circle_Double_List &&other) noexcept;
 
-    Circle_Double_List(T value, long long size);
+    Circle_Double_List(const T &value, long long size);
 
     ~Circle_Double_List();
 
@@ -75,7 +84,12 @@ public:
 };
 
 template<typename T>
-Circle_Double_List<T>::Iterator::Iterator(Node *node): node_(node)
+Circle_Double_List<T>::Node::Node()
+{
+}
+
+template<typename T>
+Circle_Double_List<T>::Iterator::Iterator(const Node *node): node_(node)
 {
 }
 
@@ -87,8 +101,8 @@ T &Circle_Double_List<T>::Iterator::operator*()
         return node_->data;
     } else
     {
-        throw NullPointerException();
-    };
+        throw Null_Pointer_Exception();
+    }
 }
 
 template<typename T>
@@ -149,7 +163,7 @@ Circle_Double_List<T>::Circle_Double_List(): current_(nullptr), size_(0)
 }
 
 template<typename T>
-Circle_Double_List<T>::Circle_Double_List(T value, long long int size): current_(nullptr), size_(0)
+Circle_Double_List<T>::Circle_Double_List(const T &value, long long int size): current_(nullptr), size_(0)
 {
     for(int i = 0; i < size; i++)
     {
@@ -183,10 +197,9 @@ void Circle_Double_List<T>::push(const T &value)
 template<typename T>
 void Circle_Double_List<T>::clear()
 {
-    Node *temp;
     while(current_ && size_ > 0)
     {
-        temp = current_;
+        Node *temp = current_;
         current_ = current_->next;
         size_--;
         delete temp;
@@ -215,8 +228,7 @@ Circle_Double_List<T>::~Circle_Double_List()
 template<typename T>
 Circle_Double_List<T>::Circle_Double_List(const Circle_Double_List &other): size_(0), current_(nullptr)
 {
-    Iterator iterator = other.end();
-    for(iterator; iterator != other.begin(); --iterator)
+    for(auto iterator = other.end(); iterator != other.begin(); --iterator)
     {
         push(*iterator);
     }
@@ -233,10 +245,10 @@ Circle_Double_List<T>::Circle_Double_List(Circle_Double_List &&other) noexcept: 
 template<typename T>
 Circle_Double_List<T> &Circle_Double_List<T>::operator=(const Circle_Double_List &other)
 {
+    size_ = 0;
     if(this != &other)
     {
-        Iterator iterator = other.end();
-        for(iterator; iterator != other.begin(); --iterator)
+        for(auto iterator = other.end(); iterator != other.begin(); --iterator)
         {
             push(*iterator);
         }

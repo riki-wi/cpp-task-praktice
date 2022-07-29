@@ -1,17 +1,18 @@
-#include "BinTree.h"
+#pragma once
+#include "Stack.h"
+
 
 template<typename T>
-class AvlTree : public BinTree<T>
+class AvlTree
 {
 protected:
-    class AvlNode : public BinTree<T>::Node
+    class AvlNode
     {
     public:
+        T value_;
         int height_;
         AvlNode *left_;
         AvlNode *right_;
-
-        AvlNode();
 
         explicit AvlNode(T value);
 
@@ -21,6 +22,8 @@ protected:
 
         void fix_height();
     };
+
+    long long size_;
 
     AvlNode *root_;
 
@@ -33,6 +36,8 @@ protected:
     AvlNode *add_recurse(AvlNode *node, const T &value);
 
     AvlNode *remove_recurse(AvlNode *node, const T &value);
+
+    AvlNode *remove_min(AvlNode *node);
 
 public:
     AvlTree();
@@ -49,21 +54,55 @@ public:
 
     AvlTree &operator=(AvlTree &&other) noexcept;
 
-    void add(const T &value) override;
+    class Iterator
+    {
+    protected:
+        AvlNode *node_;
 
-    T get_root() const override;
+        Stack<AvlNode *> stack;
 
-    void remove(const T &value) override;
+        AvlNode *travel_left(AvlNode *node);
+
+        enum flag
+        {
+            TRAVEL, NO_TRAVEL
+        };
+
+        flag flag_travel_;
+
+    public:
+        explicit Iterator(AvlNode *node, flag flag_travel = TRAVEL);
+
+        T &operator*();
+
+        bool operator==(const Iterator &other) const;
+
+        bool operator!=(const Iterator &other) const;
+
+        void operator++();
+
+        friend AvlTree;
+    };
+
+    void add(const T &value);
+
+    T get_root() const;
+
+    long long get_size() const;
+
+    void remove(const T &value);
+
+    void clear(AvlNode *node);
+
+    Iterator find(const T &value) const;
+
+    Iterator begin() const;
+
+    Iterator end() const;
 };
 
 template<typename T>
-AvlTree<T>::AvlNode::AvlNode(): BinTree<T>::Node(), height_(0), left_(nullptr), right_(nullptr)
-{
-
-}
-
-template<typename T>
-AvlTree<T>::AvlNode::AvlNode(T value): BinTree<T>::Node(value), height_(1), left_(nullptr), right_(nullptr)
+AvlTree<T>::AvlNode::AvlNode(T value): value_(value), height_(1), left_(nullptr), right_(nullptr)
 {
 }
 
@@ -98,27 +137,26 @@ void AvlTree<T>::AvlNode::fix_height()
 }
 
 template<typename T>
-AvlTree<T>::AvlTree(): BinTree<T>(), root_(nullptr)
+AvlTree<T>::AvlTree(): root_(nullptr), size_(0)
 {
 }
 
 template<typename T>
-AvlTree<T>::AvlTree(T value): BinTree<T>(value), root_(new AvlNode(value))
+AvlTree<T>::AvlTree(T value): root_(new AvlNode(value)), size_(1)
 {
 }
 
 template<typename T>
-AvlTree<T>::AvlTree(const AvlTree &other): root_(nullptr), BinTree<T>::size_(0)
+AvlTree<T>::AvlTree(const AvlTree &other): root_(nullptr), size_(0)
 {
-    typename BinTree<T>::Iterator iterator = other.begin();
-    for(iterator; iterator != other.end(); ++iterator)
+    for(auto iterator = other.begin(); iterator != other.end(); ++iterator)
     {
         add(*iterator);
     }
 }
 
 template<typename T>
-AvlTree<T>::AvlTree(AvlTree &&other) noexcept: root_(other.root_), BinTree<T>::size_(other.size_)
+AvlTree<T>::AvlTree(AvlTree &&other) noexcept: root_(other.root_), size_(other.size_)
 {
     other.root_ = nullptr;
     other.size_ = 0;
@@ -127,7 +165,7 @@ AvlTree<T>::AvlTree(AvlTree &&other) noexcept: root_(other.root_), BinTree<T>::s
 template<typename T>
 AvlTree<T>::~AvlTree()
 {
-    BinTree<T>::clear(root_);
+    clear(root_);
 }
 
 template<typename T>
@@ -135,8 +173,7 @@ AvlTree<T> &AvlTree<T>::operator=(const AvlTree &other)
 {
     if(this != &other)
     {
-        typename BinTree<T>::Iterator iterator = other.begin();
-        for(iterator; iterator != other.end(); ++iterator)
+        for(auto iterator = other.begin(); iterator != other.end(); ++iterator)
         {
             add(*iterator);
         }
@@ -151,11 +188,79 @@ AvlTree<T> &AvlTree<T>::operator=(AvlTree &&other) noexcept
     {
         clear(root_);
         root_ = other.root_;
-        BinTree<T>::size_ = other.size_;
+        size_ = other.size_;
         other.root_ = nullptr;
         other.size_ = 0;
     }
     return *this;
+}
+
+template<typename T>
+AvlTree<T>::Iterator::Iterator(AvlTree::AvlNode *node, flag flag_travel): node_(node), flag_travel_(flag_travel)
+{
+    if(flag_travel_ == 0)
+    {
+        node_ = travel_left(node);
+    }
+}
+
+template<typename T>
+T &AvlTree<T>::Iterator::operator*()
+{
+    if(node_)
+    {
+        return node_->value_;
+    } else
+    {
+        throw NullPointerException();
+    }
+}
+
+template<typename T>
+bool AvlTree<T>::Iterator::operator==(const AvlTree::Iterator &other) const
+{
+    if(this == &other)
+    {
+        return true;
+    }
+    return node_ == other.node_;
+}
+
+template<typename T>
+bool AvlTree<T>::Iterator::operator!=(const AvlTree::Iterator &other) const
+{
+    return !(this->operator==(other));
+}
+
+template<typename T>
+void AvlTree<T>::Iterator::operator++()
+{
+    if(node_->right_ != nullptr)
+    {
+        node_ = travel_left(node_->right_);
+    } else if(!stack.is_empty())
+    {
+        node_ = stack.top();
+        stack.pop_stack();
+    } else
+    {
+        node_ = nullptr;
+    }
+}
+
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::Iterator::travel_left(AvlTree::AvlNode *node)
+{
+    if(node == nullptr)
+    {
+        return nullptr;
+    }
+    while(node->left_ != nullptr)
+    {
+        stack.push_stack(node);
+        node = node->left_;
+    }
+    return node;
 }
 
 template<typename T>
@@ -262,7 +367,7 @@ typename AvlTree<T>::AvlNode *AvlTree<T>::remove_recurse(AvlTree::AvlNode *node,
         {
             min = min->left_;
         }
-        min->right_ = right;
+        min->right_ = remove_min(right);
         min->left_ = left;
         return balance(min);
     }
@@ -282,3 +387,71 @@ void AvlTree<T>::remove(const T &value)
     root_ = remove_recurse(root_, value);
 }
 
+template<typename T>
+typename AvlTree<T>::Iterator AvlTree<T>::find(const T &value) const
+{
+    if(root_)
+    {
+        AvlNode *current = root_;
+        while(current)
+        {
+            if(value < current->value_)
+            {
+                current = current->left_;
+            } else if(current->value_ < value)
+            {
+                current = current->right_;
+            } else
+            {
+                return Iterator(current, Iterator::NO_TRAVEL);
+            }
+        }
+    }
+    return Iterator(nullptr);
+}
+
+template<typename T>
+typename AvlTree<T>::Iterator AvlTree<T>::begin() const
+{
+    return Iterator(root_);
+}
+
+template<typename T>
+typename AvlTree<T>::Iterator AvlTree<T>::end() const
+{
+    return Iterator(nullptr);
+}
+
+template<typename T>
+void AvlTree<T>::clear(AvlNode *node)
+{
+    if(node != nullptr)
+    {
+        if(node->left_ != nullptr)
+        {
+            clear(node->left_);
+        }
+        if(node->right_ != nullptr)
+        {
+            clear(node->right_);
+        }
+        delete node;
+    }
+}
+
+template<typename T>
+long long AvlTree<T>::get_size() const
+{
+    return size_;
+}
+
+template<typename T>
+typename AvlTree<T>::AvlNode *AvlTree<T>::remove_min(AvlTree::AvlNode *node)
+{
+    if(node->left_ == 0)
+    {
+        return node->right_;
+    }
+    node->left_ = remove_min(node->left_);
+    return balance(node);
+}

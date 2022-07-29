@@ -2,6 +2,7 @@
 
 #include "BinTreeTest.cpp"
 #include "AvlTreeTest.cpp"
+#include "SimpleMapTest.cpp"
 #include "StackTest.cpp"
 
 int main(int argc, char **argv)

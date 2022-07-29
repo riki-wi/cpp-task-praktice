@@ -5,6 +5,7 @@
 
 TEST(get_root_avl, test_one)
 {
+
     AvlTree<int> tree;
     ASSERT_THROW(tree.get_root(), NullPointerException);
 }
@@ -99,12 +100,13 @@ TEST(find_avl, test_one)
 TEST(find_avl, test_two)
 {
     AvlTree<int> tree;
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < 5; i++)
     {
         tree.add(i);
     }
 
     int i = 0;
+
     for(AvlTree<int>::Iterator iter = tree.begin(); iter != tree.end(); ++iter)
     {
         ASSERT_EQ(i, *iter);
