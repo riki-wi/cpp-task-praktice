@@ -41,7 +41,7 @@ public:
         Node *node_;
 
     public:
-        explicit Iterator(const Node *node);
+        explicit Iterator(Node *node);
 
         T &operator*();
 
@@ -89,7 +89,7 @@ Circle_Double_List<T>::Node::Node()
 }
 
 template<typename T>
-Circle_Double_List<T>::Iterator::Iterator(const Node *node): node_(node)
+Circle_Double_List<T>::Iterator::Iterator(Node *node): node_(node)
 {
 }
 
