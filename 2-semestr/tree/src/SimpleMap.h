@@ -27,7 +27,7 @@ private:
 
         void set_key(const T &new_key);
 
-        void set_value(const T &new_value);
+        void set_value(const L &new_value);
 
         bool operator==(const Pair &right) const;
 
@@ -84,7 +84,7 @@ void Simple_Map<T, L>::Pair::set_key(const T &new_key)
 }
 
 template<typename T, typename L>
-void Simple_Map<T, L>::Pair::set_value(const T &new_value)
+void Simple_Map<T, L>::Pair::set_value(const L &new_value)
 {
     value_ = new_value;
 }
