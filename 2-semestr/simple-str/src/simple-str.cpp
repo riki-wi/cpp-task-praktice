@@ -131,6 +131,7 @@ int split_string(const char *str, char symbol, char ***mas)
         } else
         {
             j++;
+            *temp = '\0';
             temp = ((*mas)[j]);
         }
     }

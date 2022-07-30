@@ -123,13 +123,12 @@ List<T> intersect_list_sorted(bool (*cmp)(const T &, const T &),
 template<typename T>
 List<T>::List(): size_(0), front_(nullptr)
 {
-};
+}
 
 template<typename T>
 List<T>::List(const List &other): size_(0), front_(nullptr)
 {
-    Iterator iterator = other.begin();
-    for(iterator; iterator != other.end(); ++iterator)
+    for(auto iterator = other.begin(); iterator != other.end(); ++iterator)
     {
         push_front(*iterator);
     }
@@ -181,8 +180,8 @@ List<T> &List<T>::operator=(const List &other)
 {
     if(this != &other)
     {
-        Iterator iterator = other.begin();
-        for(iterator; iterator != other.end(); ++iterator)
+        this->clear();
+        for(auto iterator = other.begin(); iterator != other.end(); ++iterator)
         {
             push_front(*iterator);
         }
@@ -324,10 +323,9 @@ void List<T>::reverse()
 template<typename T>
 void List<T>::clear()
 {
-    Node *temp;
     while(front_)
     {
-        temp = front_;
+        Node *temp = front_;
         front_ = front_->next;
         delete temp;
     }
