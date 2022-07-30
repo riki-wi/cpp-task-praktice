@@ -100,3 +100,8 @@ TEST(stringEmpty, TestTwo)
 {
     ASSERT_FALSE(string_empty("h"));
 }
+
+TEST(polinom_hash, TestOne)
+{
+    ASSERT_EQ(1, polynomial_hash("a"));
+}

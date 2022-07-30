@@ -136,3 +136,21 @@ int split_string(const char *str, char symbol, char ***mas)
     }
     return count;
 }
+
+long long polynomial_hash(const char *str)
+{
+    const int k = 255;
+    const int mod = 1e9+7;
+
+    long long res = 0;
+    long long rank = 1;
+    long long len = length_string(str);
+    for(int i = 0; i < len; i++)
+    {
+        int s = (int) (str[i] - 'a' + 1);
+        res = (res + rank * s) % mod;
+        rank = (rank * k) % mod;
+    }
+
+    return res;
+}

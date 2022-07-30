@@ -43,7 +43,9 @@ public:
 
     void remove(const T &key);
 
-    L find_by_key(const T &key) const;
+    bool find_by_key(const T &key) const;
+
+    L get_by_key(const T &key) const;
 
     void change_by_key(const T &key, const L &new_value);
 
@@ -122,23 +124,42 @@ void Simple_Map<T, L>::remove(const T &key)
 }
 
 template<typename T, typename L>
-L Simple_Map<T, L>::find_by_key(const T &key) const
+bool Simple_Map<T, L>::find_by_key(const T &key) const
 {
     auto iter = tree.find(Pair(key));
-    return iter.operator*().get_value();
+    if(iter != tree.end())
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
 }
 
 template<typename T, typename L>
 void Simple_Map<T, L>::change_by_key(const T &key, const L &new_value)
 {
     auto iter = tree.find(Pair(key));
-    iter.operator*().set_value(new_value);
+    if(iter != tree.end())
+    {
+        iter.operator*().set_value(new_value);
+    }
 }
 
 template<typename T, typename L>
 long long Simple_Map<T, L>::size()
 {
     return tree.get_size();
+}
+
+template<typename T, typename L>
+L Simple_Map<T, L>::get_by_key(const T &key) const
+{
+    if(find_by_key(key))
+    {
+        auto iter = tree.find(Pair(key));
+        return iter.operator*().get_value();
+    }
 }
 
 #endif

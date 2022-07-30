@@ -33,3 +33,5 @@ bool string_eq(const char *str_one, const char *str_two);
 bool string_empty(const char *str);
 
 int split_string(const char *str, char symbol, char ***mas);
+
+long long polynomial_hash(const char *str);
