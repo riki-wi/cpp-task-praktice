@@ -35,3 +35,7 @@ bool string_empty(const char *str);
 int split_string(const char *str, char symbol, char ***mas);
 
 long long polynomial_hash(const char *str);
+
+char *remove_zero_begin(const char *str);
+
+char *remove_zero_end(const char *str);

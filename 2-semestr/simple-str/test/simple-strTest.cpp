@@ -105,3 +105,43 @@ TEST(polinom_hash, TestOne)
 {
     ASSERT_EQ(1, polynomial_hash("a"));
 }
+
+TEST(remove_zero_end, TestOne)
+{
+    ASSERT_STREQ(remove_zero_end("000hello000"), "000hello");
+}
+
+TEST(remove_zero_end, TestTwo)
+{
+    ASSERT_STREQ(remove_zero_end("hello"), "hello");
+}
+
+TEST(remove_zero_end, TestThree)
+{
+    ASSERT_STREQ(remove_zero_end("000"), "");
+}
+
+TEST(remove_zero_end, TestFour)
+{
+    ASSERT_STREQ(remove_zero_end("0h0e0l0lo0"), "0h0e0l0lo");
+}
+
+TEST(remove_zero_begin, TestOne)
+{
+    ASSERT_STREQ(remove_zero_begin("000hello000"), "hello000");
+}
+
+TEST(remove_zero_begin, TestTwo)
+{
+    ASSERT_STREQ(remove_zero_begin("hello"), "hello");
+}
+
+TEST(remove_zero_begin, TestThree)
+{
+    ASSERT_STREQ(remove_zero_begin("000"), "");
+}
+
+TEST(remove_zero_begin, TestFour)
+{
+    ASSERT_STREQ(remove_zero_begin("0h0e0l0lo0"), "h0e0l0lo0");
+}

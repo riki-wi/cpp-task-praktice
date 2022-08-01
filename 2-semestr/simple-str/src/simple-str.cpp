@@ -135,6 +135,7 @@ int split_string(const char *str, char symbol, char ***mas)
             temp = ((*mas)[j]);
         }
     }
+    *temp = '\0';
     return count;
 }
 
@@ -154,4 +155,57 @@ long long polynomial_hash(const char *str)
     }
 
     return res;
+}
+
+char *remove_zero_begin(const char *str)
+{
+    if(length_string(str) == count_symbol(str, '0'))
+    {
+        return (char *) "";
+    } else
+    {
+        long long index = 0;
+        for(long long i = 0; i < length_string(str); i++)
+        {
+            if(str[i] != '0')
+            {
+                index = i;
+                break;
+            }
+        }
+
+        char *res = new char[length_string(str) - index + 1];
+        for(long long i = index; i < length_string(str); i++)
+        {
+            res[i - index] = str[i];
+        }
+        res[length_string(str) - index] = '\0';
+        return res;
+    }
+}
+
+char *remove_zero_end(const char *str)
+{
+    if(length_string(str) == count_symbol(str, '0'))
+    {
+        return (char *)"";
+    } else
+    {
+        long long index = 0;
+        for(long long i = 0; i < length_string(str); i++)
+        {
+            if(str[i] != '0')
+            {
+                index = i;
+            }
+        }
+
+        char *res = new char[index + 2]{'\0'};
+        for(long long i = 0; i < index + 1; i++)
+        {
+            res[i] = str[i];
+        }
+        res[index + 1] = '\0';
+        return res;
+    }
 }
