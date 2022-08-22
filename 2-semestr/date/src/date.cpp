@@ -48,6 +48,10 @@ Date::Date(const char *date)
     delete[] splitDate;
 }
 
+Date::Date() : day_(0), month_(0), year_(0), leap_(false)
+{
+}
+
 int Date::getDay() const
 {
     return day_;

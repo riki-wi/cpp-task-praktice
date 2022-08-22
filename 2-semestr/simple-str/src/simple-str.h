@@ -38,4 +38,6 @@ long long polynomial_hash(const char *str);
 
 char *remove_zero_begin(const char *str);
 
+char *remove_space_begin(const char *str);
+
 char *remove_zero_end(const char *str);

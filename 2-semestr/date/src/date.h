@@ -14,6 +14,8 @@ private:
     bool checkLeap(int y);
 
 public:
+    Date();
+
     explicit Date(const char *date);
 
     int getDay() const;

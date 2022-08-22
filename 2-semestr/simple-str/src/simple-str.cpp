@@ -209,3 +209,30 @@ char *remove_zero_end(const char *str)
         return res;
     }
 }
+
+char *remove_space_begin(const char *str)
+{
+    if(length_string(str) == count_symbol(str, ' '))
+    {
+        return (char *) "";
+    } else
+    {
+        long long index = 0;
+        for(long long i = 0; i < length_string(str); i++)
+        {
+            if(str[i] != ' ')
+            {
+                index = i;
+                break;
+            }
+        }
+
+        char *res = new char[length_string(str) - index + 1];
+        for(long long i = index; i < length_string(str); i++)
+        {
+            res[i - index] = str[i];
+        }
+        res[length_string(str) - index] = '\0';
+        return res;
+    }
+}
