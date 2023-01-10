@@ -18,6 +18,8 @@ public:
     void pop_stack();
 
     bool is_empty() const;
+
+    long long get_size() const;
 };
 
 template<typename T>
@@ -45,4 +47,10 @@ template<typename T>
 bool Stack<T>::is_empty() const
 {
     return stack.empty();
+}
+
+template<typename T>
+long long Stack<T>::get_size() const
+{
+    return stack.size();
 }
