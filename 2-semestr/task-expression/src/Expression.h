@@ -17,7 +17,7 @@ public:
 
 //------------------------------------------------------
 
-struct Const : public Expr
+class Const : public Expr
 {
 public:
     double constanta_;
