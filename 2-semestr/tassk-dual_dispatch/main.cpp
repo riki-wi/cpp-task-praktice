@@ -11,12 +11,15 @@ class Number
 public:
     virtual ~Number() = default;
 
-    virtual Integer operator+(const Integer &left ) = 0;
+    virtual std::ostream &operator<<(std::ostream &os) = 0;
 
-    virtual Real operator+=(const Real &) = 0;
+    virtual Number &operator+(Number &) = 0;
 
-    virtual Complex operator+=(const Complex &) = 0;
+    virtual Number &operator+(Integer &) = 0;
 
+    virtual Number &operator+(Real &) = 0;
+
+    virtual Number &operator+(Complex &) = 0;
 };
 
 class Integer : public Number
@@ -27,13 +30,15 @@ public:
 
     ~Integer() override = default;
 
-    void operator+=(const Number &) override;
+    std::ostream &operator<<(std::ostream &os) override;
 
-    void operator+=(const Integer &) override;
+    Number &operator+(Number &) override;
 
-    void operator+=(const Real &) override;
+    Number &operator+(Integer &) override;
 
-    void operator+=(const Complex &) override;
+    Number &operator+(Real &) override;
+
+    Number &operator+(Complex &) override;
 };
 
 class Real : public Number
@@ -42,115 +47,124 @@ public:
 
     double d{};
 
+    std::ostream &operator<<(std::ostream &os) override;
+
     ~Real() override = default;
 
-    void operator+=(const Number &) override;
+    Number &operator+(Number &) override;
 
-    void operator+=(const Integer &) override;
+    Number &operator+(Integer &) override;
 
-    void operator+=(const Real &) override;
+    Number &operator+(Real &) override;
 
-    void operator+=(const Complex &) override;
+    Number &operator+(Complex &) override;
 };
 
 class Complex : public Number
 {
 public:
-
     double r{};
 
     double i{};
 
     ~Complex() override = default;
 
-    void operator+=(const Number &) override;
+    std::ostream &operator<<(std::ostream &os) override;
 
-    void operator+=(const Integer &) override;
+    Number &operator+(Number &) override;
 
-    void operator+=(const Real &) override;
+    Number &operator+(Integer &) override;
 
-    void operator+=(const Complex &) override;
+    Number &operator+(Real &) override;
+
+    Number &operator+(Complex &) override;
 };
 
-void Integer::operator+=(const Number & right)
+std::ostream &Integer::operator<<(std::ostream &os)
 {
-    *this += right;
+    return os << n;
 }
 
-void Integer::operator+=(const Integer & right)
+Number &Integer::operator+(Number &right)
 {
-   n += right.n;
+    return right + *this;
 }
 
-void Integer::operator+=(const Real & right)
+Number &Integer::operator+(Integer &right)
 {
-    n += right.d;
+    Number& res = *this + right;
+    return res;
 }
 
-void Integer::operator+=(const Complex & right)
+Number &Integer::operator+(Real &right)
+{
+    n += static_cast<int>(right.d);
+    return *this;
+}
+
+Number &Integer::operator+(Complex &right)
 {
     n += static_cast<int>(right.r);
+    return *this;
 }
 
-void Real::operator+=(const Number & right)
+std::ostream &Real::operator<<(std::ostream &os)
 {
-    *this += right;
+    return os << d;
 }
 
-void Real::operator+=(const Integer & right)
+Number &Real::operator+(Number &right)
+{
+    return right + *this;
+}
+
+Number &Real::operator+(Integer &right)
 {
     d += right.n;
+    return *this;
 }
 
-void Real::operator+=(const Real & rigth)
+Number &Real::operator+(Real &right)
 {
-    d += rigth.d;
+    d += right.d;
+    return *this;
 }
 
-void Real::operator+=(const Complex & right)
+Number &Real::operator+(Complex &right)
 {
     d += right.r;
+    return *this;
 }
 
-void Complex::operator+=(const Number & right)
+std::ostream &Complex::operator<<(std::ostream &os)
 {
-    *this += right;
+    return os << r << " + " << i << "i";
 }
 
-void Complex::operator+=(const Integer & rigth)
+Number &Complex::operator+(Number &right)
 {
-    r += rigth.n;
+    return right + *this;
 }
 
-void Complex::operator+=(const Real & right)
+Number &Complex::operator+(Integer &right)
+{
+    r += right.n;
+    return *this;
+}
+
+Number &Complex::operator+(Real &right)
 {
     r += right.d;
+    return *this;
 }
 
-void Complex::operator+=(const Complex & right)
+Number &Complex::operator+(Complex &right)
 {
     r += right.r;
-    i += right.r;
+    i += right.i;
+    return *this;
 }
 
 int main()
 {
-    Integer x;
-    x.n = 1;
-
-    Real y;
-    y.d = 3.23;
-
-    Complex z;
-    z.r = 4;
-    z.i = 5.34;
-
-    Number &p_x = x;
-    Number &p_y = y;
-    Number &res = x + y;
-
-    p_y += p_x;
-    p_x += p_y;
-    std::cout << x.n << std::endl;
-    std::cout << x.n << std::endl;
 }
