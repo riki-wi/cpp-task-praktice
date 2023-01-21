@@ -1,5 +1,28 @@
 #include<iostream>
 
+
+#define SUM(TYPE, VAR, VAR_SUM)        \
+TYPE res;                              \
+res.VAR = 0;                           \
+res.VAR = VAR + right.VAR_SUM;         \
+*this = res;                           \
+return *this;
+
+#define SUM_COMPLEX(VAR_SUM) \
+Complex res;                 \
+res.r = 0;                   \
+res.i = 0;                   \
+res.r = r + right.VAR_SUM;   \
+res.i = i;                   \
+*this = res;                 \
+return *this;
+
+class Integer;
+
+class Real;
+
+class Complex;
+
 class Integer;
 
 class Real;
@@ -92,20 +115,17 @@ Number &Integer::operator+(Number &right)
 
 Number &Integer::operator+(Integer &right)
 {
-    Number& res = *this + right;
-    return res;
+    SUM(Integer, n, n)
 }
 
 Number &Integer::operator+(Real &right)
 {
-    n += static_cast<int>(right.d);
-    return *this;
+    SUM(Integer, n, d)
 }
 
 Number &Integer::operator+(Complex &right)
 {
-    n += static_cast<int>(right.r);
-    return *this;
+    SUM(Integer, n, r)
 }
 
 std::ostream &Real::operator<<(std::ostream &os)
@@ -120,20 +140,17 @@ Number &Real::operator+(Number &right)
 
 Number &Real::operator+(Integer &right)
 {
-    d += right.n;
-    return *this;
+    SUM(Real, d, n)
 }
 
 Number &Real::operator+(Real &right)
 {
-    d += right.d;
-    return *this;
+    SUM(Real, d, d)
 }
 
 Number &Real::operator+(Complex &right)
 {
-    d += right.r;
-    return *this;
+    SUM(Real, d, r)
 }
 
 std::ostream &Complex::operator<<(std::ostream &os)
@@ -148,23 +165,46 @@ Number &Complex::operator+(Number &right)
 
 Number &Complex::operator+(Integer &right)
 {
-    r += right.n;
-    return *this;
+    SUM_COMPLEX(n)
 }
 
 Number &Complex::operator+(Real &right)
 {
-    r += right.d;
-    return *this;
+    SUM_COMPLEX(d)
 }
 
 Number &Complex::operator+(Complex &right)
 {
-    r += right.r;
-    i += right.i;
+    Complex res;
+    res.r = 0;
+    res.i = 0;
+    res.r = r + right.r;
+    res.i = i + right.i;
+    *this = res;
     return *this;
 }
 
 int main()
 {
+    Integer x;
+    Real y;
+    x.n = 4;
+    y.d = 5.32;
+
+    Number &p_x = x;
+    Number &p_y = y;
+
+    Number &res = p_x + p_y;
+    res.operator<<(std::cout);
+    std::cout << std::endl;
+
+    Complex z;
+    z.r = 5.67;
+    z.i = 54.3;
+
+    Number &p_z = z;
+    Number &res2 = res + p_z;
+
+    res2.operator<<(std::cout);
+    std::cout << std::endl;
 }
