@@ -152,17 +152,12 @@ int main()
     for(int i = 0; i < 20; i++)
     {
         std::cout << check_all();
-        std::vector<int>().swap(v1);
-        std::vector<int>().swap(v2);
     }
 
     std::cout << std::endl;
-
     for(int i = 0; i < 20; i++)
     {
         std::cout << check_all_m();
-        std::vector<int>().swap(v1);
-        std::vector<int>().swap(v2);
     }
 
     return 0;
