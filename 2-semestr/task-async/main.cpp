@@ -42,6 +42,42 @@ double pi(int threads)
 //------------------------------------------------------------------------------------------------------
 
 
+long long mod_block(const std::string &str, int a, int b)
+{
+    long long mod17 = 0;
+    std::cout << "a: " << a << "b: " << b << std::endl;
+    for(int i = a; i < b; i++)
+    {
+        long long t = std::pow(10, i % 16);
+        mod17 += (t % 17) * (str[i] - '0');
+    }
+    return mod17;
+}
+
+long long mod(const std::string& str, int thread)
+{
+    long long mod17 = 0;
+
+    int shift = str.size() / thread + (str.size() % thread ? 1 : 0);
+    int i = 0;
+    std::string temp = std::string(str.rbegin(), str.rend());
+    while (thread)
+    {
+        if (thread == 1)
+        {
+            std::future<long long> f1 = std::async(mod_block, temp, i, temp.length());
+            mod17 += f1.get();
+            thread--;
+            break;
+        }
+        std::future<long long> f1 = std::async(mod_block, temp, i, i + shift);
+        i += shift;
+        mod17 += f1.get();
+        thread--;
+    }
+    return mod17 % 17;
+}
+
 //------------------------------------------------------------------------------------------------------
 
 int sum_block(const std::string &str, int a, int b)
@@ -169,6 +205,19 @@ int main()
     std::cout << MultiThreadFind(std::string("aaaaaaaaaaaaaa"), "a", 2) << std::endl;
     std::cout << MultiThreadFind("aaaa", "aa", 2) << std::endl;
     std::cout << MultiThreadFind("abaabababab", "aba", 2) << std::endl;
+
+    //---------------------------------------------
+
+    std::cout << mod("1700", 2) << std::endl;
+
+    std::cout << mod("1132105967", 3) << std::endl;
+    std::cout << 1132105967 % 17;
+
+    std::cout << mod("12345678910111213", 5) << std::endl;
+    std::cout << 12345678910111213 % 17;
+
+    std::cout << mod("1234567891011121", 4) << std::endl;
+    std::cout << 1234567891011121 % 17;
 
     return 0;
 }

@@ -1,8 +1,40 @@
 #include "src/Expression.h"
+#include <vector>
+
+template<typename T>
+class Foo
+{
+public:
+    T x;
+
+    Foo(T x_)
+    {
+        x = x_;
+    };
+
+    void print()
+    {
+        std::cout << x;
+    }
+};
+
 
 int main()
 {
-    Expr *e = new Sum(new Var, new Const(2)), *p;
+
+    int x = 5;
+    double z = 3.5;
+
+    Foo<int> foo_int(x);
+    foo_int.print();
+
+    Foo<double> foo_double(z);
+    foo_double.print();
+
+    std::vector<int> vector(3);
+
+
+   /* Expr *e = new Sum(new Var, new Const(2)), *p;
     e->print(); // (x+2)
     std::cout << std::endl << e->eval(4.0) << std::endl; // 6
     p = e->der(); // (1+0)
@@ -42,5 +74,5 @@ int main()
 
     delete p_sin;
     delete p_cos;
-    return 0;
+    return 0;*/
 }

@@ -23,12 +23,6 @@ class Real;
 
 class Complex;
 
-class Integer;
-
-class Real;
-
-class Complex;
-
 class Number
 {
 public:
