@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <cassert>
 #include <sstream>
 #include <initializer_list>
 
@@ -131,3 +132,94 @@ Polynomial operator+(const Polynomial p1, const Polynomial p2)
     return p;
 }
 
+void TestOne()
+{
+    double mas[] = {0};
+    Polynomial p(0, mas);
+    Polynomial g;
+
+    assert(p == g);
+}
+
+void TestIndex()
+{
+    Polynomial f({1, 2, 3});
+
+    assert(1 == f[0]);
+    assert(2 == f[1]);
+    assert(3 == f[2]);
+
+    f[0] = 10;
+
+    assert(10 == f[0]);
+}
+
+void TestAttention()
+{
+    Polynomial g({1, 2, 3});
+
+    assert(1 == g(0));
+    assert(6 == g(1));
+}
+
+void TestPrint()
+{
+    Polynomial g({1, 2, 3});
+    stringstream ss;
+    ss << g;
+
+    std::string test = "3*x^2 + 2*x^1 + 1\n";
+    std::string res = ss.str();
+
+    assert(res == test);
+}
+
+void TestInput()
+{
+    Polynomial g({1, 2, 3});
+
+    Polynomial p;
+    cin >> p;
+    assert(p == g);
+}
+
+void TestSum()
+{
+    Polynomial g({1, 2, 3});
+    Polynomial f({3, 2, 1});
+
+    Polynomial sum({4, 4, 4});
+
+    assert(sum == (g + f));
+}
+
+void TestInit()
+{
+    double mas[] = {1, 2, 3};
+    Polynomial p(2, mas);
+    Polynomial g({1, 2, 3});
+
+    assert(p == g);
+}
+
+void TestCopy()
+{
+    Polynomial g({1, 2, 3});
+    Polynomial f = g;
+
+    assert(g == f);
+}
+
+
+int main()
+{
+    TestOne();
+    TestIndex();
+    TestAttention();
+    TestPrint();
+    TestInput();
+    TestSum();
+    TestInit();
+    TestCopy();
+    return 0;
+}
